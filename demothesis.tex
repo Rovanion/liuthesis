@@ -1,0 +1,74 @@
+%%% demothesis.tex --- 
+%% 
+%% Filename: demothesis.tex
+%% Description: 
+%% Author: Ola Leifler
+%% Maintainer: 
+%% Created: Thu Oct 14 12:52:20 2010 (CEST)
+%% Version: $Id$
+%% Version: 
+%% Last-Updated: Wed Nov 10 11:19:37 2010 (CET)
+%%           By: Ola Leifler
+%%     Update #: 71
+%% URL: 
+%% Keywords: 
+%% Compatibility: 
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%% Commentary: 
+%% 
+%% 
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%% Change log:
+%% 
+%% 
+%% RCS $Log$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%% Code:
+\documentclass[msc,lith]{liuthesis}
+%% Settings go in settings.tex
+\include{settings}
+
+\department{Institutionen för datavetenskap}
+\departmentenglish{Department of Computer science}
+\departmentshort{IDA}
+\supervisor{Min handledare}
+\examiner{Min examinator}
+\titleenglish{A title}
+\publicationyear{15}
+\currentyearthesisnumber{001}
+\dateofpublication{2015-05-08}
+\level{A}
+
+%\author{\texttt{\textbackslash author}}
+\author{Ola Leifler}
+
+\begin{document}
+
+\chapterstyle{VZ43}
+
+\include{Intro}
+\include{theory}
+\include{method}
+\include{results}
+\include{discussion}
+\include{conclusion}
+\printbibliography
+% Demonstrates the use of included publications, for graduate-level theses
+\ifmsc
+\else
+\includearticle{scigen}
+\includearticletex{scigen}
+\fi
+\end{document}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% demothesis.tex ends here
+

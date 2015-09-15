@@ -1,0 +1,79 @@
+LiU Thesis class
+
+Ola Leifler, ola.leifler@liu.se, 110523
+
+** Package options **
+
+The following options are recognized by the liuthesis document class
+
+phd - For dissertations (default)
+lic - For licentiate theses
+hu     - For the medical sciences
+filfak - For the humanities
+lith   - For LiTH (default)
+exhibitpage - Produce an exhibit page (spikblad) and no thesis. Use this option to 
+
+
+plus all the options recognized by the memoir package, which liuthesis extends.
+
+** Packages included **
+
+The liuthesis package includes a number of packages for convenient,
+contemporary TeX typesetting. When using the XeTeX engine for
+typesetting your manuscript, the polyglossia, mathspec, fontspec,
+xunicode and xltxtra packages are loaded. All manuscript files should
+be written with UTF-8 encoding. When PDFLaTeX is used as the
+typsetting engine, the babel, palatino and mathpazo packages are used
+instead.
+
+The BibLaTeX package is used for managing references. Currently, there
+is no way to specify the load-time options to biblatex as document
+class options together with other options, so the biblatex package _has
+to be loaded manually_ in settings.tex (see Usage below).
+
+** Usage **
+
+This package contains a style file for theses (liuthesis.cls) and a file
+settings.tex which must at least include the lines
+
+\usepackage{biblatex}
+\bibliography{<my bibliography file>}
+
+and possibly other settings. In the directory figures/, you should
+place all graphics for your thesis. Logos are included for LiTH,
+please add other logotypes as appropriate.
+
+In your thesis file, you need to specify where the bibliography
+should be typeset using the command \printbibliography. demothesis.tex
+provides an example of how this works.
+
+Abstract.tex is a mandatory file with your abstract, other files can
+be included at will from your main thesis file.
+
+** Including articles **
+
+\includearticle{<citekey>}
+
+With this command, you can include pdf articles and refer to them in
+your thesis. demothesis.tex provides an example of this. <citekey>
+should be the same as the key in your bibliography which describes
+your article, and the file name of the pdf file. You can refer to your
+articles in your thesis using the reference key "art:<citekey>".
+
+\includearticletex{<citekey>}
+
+With this command, you can include TeX articles and refer to them in your
+thesis. demothesis.tex provides an example of this. <citekey> should
+be the same as the key in your bibliography which describes your
+article, and the file name of the TeX manuscipt in the papers/
+directory. Please refer to the scigen.tex example for hints how you
+format your manuscript for inclusion. You can refer to your articles
+in your thesis using the reference key "art:<citekey>".
+
+There are a number of commands with one parameter which should be used
+to specify thesis metadata, and they are all typeset using the command
+names as they appear in the PDF. For instance, using the command
+\opponent{Your opponent}, you can specify the opponent. If you do not,
+the pdf will contain the verbatim text "\opponent" on all locations
+where the argument supplied to that command will substitute
+"\opponent".
