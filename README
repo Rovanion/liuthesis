@@ -8,11 +8,15 @@ The following options are recognized by the liuthesis document class
 
 phd - For dissertations (default)
 lic - For licentiate theses
+msc - For Master's theses
+
 hu     - For the medical sciences
 filfak - For the humanities
 lith   - For LiTH (default)
-exhibitpage - Produce an exhibit page (spikblad) and no thesis. Use this option to 
 
+exhibitpage - Produce an exhibit page (spikblad) and no thesis. Use
+	      this option to produce an exhibit page only for PhD
+	      dissertations.
 
 plus all the options recognized by the memoir package, which liuthesis extends.
 
