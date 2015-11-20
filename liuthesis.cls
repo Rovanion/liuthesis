@@ -102,11 +102,11 @@
 \newif\ifhu
 \newif\iffilfak
 \newif\ifphd
-\phdtrue
+% \phdtrue
 \newif\iflic
 \licfalse
 \newif\ifmsc
-\mscfalse
+\msctrue
 
 \DeclareOption{hu}{%
   \hutrue

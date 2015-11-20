@@ -6,9 +6,9 @@ Ola Leifler, ola.leifler@liu.se, 110523
 
 The following options are recognized by the liuthesis document class
 
-phd - For dissertations (default)
+phd - For dissertations 
 lic - For licentiate theses
-msc - For Master's theses
+msc - For Master's theses (default)
 
 hu     - For the medical sciences
 filfak - For the humanities
