@@ -20,6 +20,7 @@ exhibitpage - Produce an exhibit page (spikblad) and no thesis. Use
 
 plus all the options recognized by the memoir package, which liuthesis extends.
 
+
 ** Packages included **
 
 The liuthesis package includes a number of packages for convenient,
@@ -81,3 +82,23 @@ names as they appear in the PDF. For instance, using the command
 the pdf will contain the verbatim text "\opponent" on all locations
 where the argument supplied to that command will substitute
 "\opponent".
+
+** File headers **
+
+To use and update the file headers appropriately, you will need Emacs
+with the header2 package. Put this information in an Emacs init file:
+
+(require 'package)
+;; Marmalade
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+;; The original ELPA archive still has some useful
+;; stuff.
+ (add-to-list 'package-archives
+              '("elpa" . "http://tromey.com/elpa/"))
+(package-initialize)
+
+(autoload 'auto-update-file-header "header2")
+(add-hook 'write-file-hooks 'auto-update-file-header)
+(add-hook 'latex-mode-hook   'auto-make-header)
