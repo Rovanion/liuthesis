@@ -42,7 +42,7 @@ This package contains a style file for theses (liuthesis.cls) and a file
 settings.tex which must at least include the lines
 
 \usepackage{biblatex}
-\bibliography{<my bibliography file>}
+\addbibresource{<my bibliography file>}
 
 and possibly other settings. In the directory figures/, you should
 place all graphics for your thesis. Logos are included for LiTH,
