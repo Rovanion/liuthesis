@@ -93,8 +93,8 @@
 \def\dedication#1{\dedicationtrue\gdef\@dedication{#1}}
 \createvariable{divanumber}
 % Include the abstract
-\gdef\@abstract{\input{Abstract}}
-\gdef\@acknowledgments{\input{Acknowledgments.tex}}
+\gdef\@abstract{\input{abstract}}
+\gdef\@acknowledgments{\input{acknowledgments.tex}}
 
 \newif\iflith
 \lithtrue
