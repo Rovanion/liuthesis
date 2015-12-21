@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Mon May  2 11:43:28 2011 (CEST)
+%% Last-Updated: Thu Dec 17 16:32:01 2015 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 939
+%%     Update #: 947
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -510,13 +510,13 @@
       \fontsize{12pt}{12pt}\selectfont\swedishenglish{av}{by}
       \\[1.5\baselineskip]
       \fontsize{24pt}{24pt}\selectfont{\bfseries\@author}
-      \\[1.5\baselineskip]
-      \fontsize{18pt}{18pt}\selectfont\isrn
-      \\[1.5\baselineskip]
-      \@dateofpublication
-      \\[1.5\baselineskip]
-      \includegraphics[width=\textwidth]{titelsid-sv}
       \vfill
+      \fontsize{18pt}{18pt}\selectfont\isrn
+      \vfill
+      \@dateofpublication
+      \vfill
+      \centering{\includegraphics[width=1.1\textwidth]{titelsid-sv}}
+      \\[.5\baselineskip]
     }
 }
 \else
