@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Tue Jan 12 13:42:58 2016 (+0100)
+%% Last-Updated: Tue Jan 12 15:07:04 2016 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 949
+%%     Update #: 951
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -678,8 +678,14 @@ Examinator: \@examiner}
 
 % Tryckmaterialets storlek
 \setstocksize{297mm}{210mm}
+% 
+\ifmsc
 \settrimmedsize{290mm}{205mm}{*}
 \settypeblocksize{*}{34pc}{1.618} % golden ratio
+\else
+\settrimmedsize {242mm}{165mm}{*}
+\settypeblocksize{*}{28pc}{1.7}
+\fi
 
 \newcommand{\resetlayout}{
   \setlength{\trimtop}{\stockheight} % \trimtop = \stockheight  - \paperheight
