@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu Dec 17 16:32:01 2015 (+0100)
+%% Last-Updated: Tue Jan 12 13:42:58 2016 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 947
+%%     Update #: 949
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -146,16 +146,19 @@
 \DeclareOption{msc}{%
   \msctrue
   \phdfalse
+  \licfalse
   \PassOptionsToClass{oneside}{memoir}
 }
 
 \DeclareOption{lic}{%
   \lictrue
   \phdfalse
+  \mscfalse
 }
 
 \DeclareOption{phd}{%
   \licfalse
+  \mscfalse
   \phdtrue
 }
 
