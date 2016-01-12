@@ -152,3 +152,6 @@ pythontex-files-*/
 # endfloat
 *.ttt
 *.fff
+
+# Emacs aux files
+*~
