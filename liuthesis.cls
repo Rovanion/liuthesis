@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Tue Jan 12 15:07:04 2016 (+0100)
+%% Last-Updated: Thu May 12 11:12:29 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 951
+%%     Update #: 1018
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -46,8 +46,8 @@
 %% 
 %%% Code:
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{liuthesis} [2010/10/19 PHD Thesis class for LiU]
-\typeout{PHD Thesis class for LiU by Ola Leifler - v 1.02}
+\ProvidesClass{liuthesis} [2016/03/10 Thesis class for LiU]
+\typeout{Undergraduate and graduate thesis class for LiU by Ola Leifler - v 1.1}
 \def\createvariable#1{%
   \expandafter\def\csname #1\endcsname{\expandafter\gdef\csname @#1\endcsname}
   \csname #1\endcsname{\texttt{\textbackslash #1}}
@@ -87,6 +87,12 @@
 % Undergrad specific
 \createvariable{area}
 \createvariable{level}
+\createvariable{thesistypename}
+\createvariable{thesiscredits}
+\createvariable{thesissubject}
+
+\createvariable{subtitleswedish}
+\createvariable{subtitleenglish}
 
 \newif\ifdedication
 \dedicationfalse
@@ -105,8 +111,8 @@
 % \phdtrue
 \newif\iflic
 \licfalse
-\newif\ifmsc
-\msctrue
+\newif\ifstudent
+\studenttrue
 
 \DeclareOption{hu}{%
   \hutrue
@@ -144,21 +150,34 @@
 }
 
 \DeclareOption{msc}{%
-  \msctrue
+  \studenttrue
   \phdfalse
   \licfalse
+  \level{A}
+  \gdef\@thesistypename{avancerad nivå}
+  \thesiscredits{30}
+  \PassOptionsToClass{oneside}{memoir}
+}
+
+\DeclareOption{bachelor}{%
+  \studenttrue
+  \phdfalse
+  \licfalse
+  \level{G}
+  \gdef\@thesistypename{grundnivå}
+  \thesiscredits{16}
   \PassOptionsToClass{oneside}{memoir}
 }
 
 \DeclareOption{lic}{%
   \lictrue
   \phdfalse
-  \mscfalse
+  \studentfalse
 }
 
 \DeclareOption{phd}{%
   \licfalse
-  \mscfalse
+  \studentfalse
   \phdtrue
 }
 
@@ -481,47 +500,84 @@
 \iflic
 \newcommand{\isrn}{LIU-\@facultyshort{}-Lic-{}-\@publicationyear:\@currentyearthesisnumber}
 \fi
-\ifmsc
+\ifstudent
 \newcommand{\isrn}{LIU-\@departmentshort{}/\@area{}-EX-\@level{}-{}-\@publicationyear/\@currentyearthesisnumber-{}-SE}
 \fi
 
 
-\ifmsc
-\renewcommand{\maketitle}{
-   \copypagestyle{titlestyle}{plain}
-   \makeevenfoot{titlestyle}{\ifxetex\fontspec{Times}\fi Linköpings
-     universitet\\
-   SE-581 83 Linköping, Sweden
-   }{}{\ifxetex\fontspec{Times}\fi Linköpings universitet\\
-   581 83 Linköping}
-   \makeoddfoot{titlestyle}{\ifxetex\fontspec{Times}\fi Linköpings
-     universitet\\
-   SE-581 83 Linköping, Sweden
-   }{}{\ifxetex\fontspec{Times}\fi Linköpings universitet\\
-   581 83 Linköping}
-   \thispagestyle{titlestyle}
-    {\centering
-      \ifxetex\fontspec{Times}\fi
-      \fontsize{27pt}{27pt}\selectfont
-      \@department\\
-      \fontsize{18pt}{18pt}\selectfont
-      \@departmentenglish\\[2\baselineskip]
-      Examensarbete
-      \\[\baselineskip]
-      \fontsize{24pt}{24pt}\selectfont{\bfseries\swedishenglish{\@titleswedish}{\@titleenglish}}
-      \\[\baselineskip]
-      \fontsize{12pt}{12pt}\selectfont\swedishenglish{av}{by}
-      \\[1.5\baselineskip]
-      \fontsize{24pt}{24pt}\selectfont{\bfseries\@author}
-      \vfill
-      \fontsize{18pt}{18pt}\selectfont\isrn
-      \vfill
-      \@dateofpublication
-      \vfill
-      \centering{\includegraphics[width=1.1\textwidth]{titelsid-sv}}
-      \\[.5\baselineskip]
+\ifstudent 
+\renewcommand*\maketitle{%
+  
+  {\ifxetex\fontspec{Calibri}\fi
+  \vspace*{-22mm}%
+  \hspace*{-10mm}%
+%  \noindent\parbox[l][0pt][t]{0pt}{%
+%    \begin{minipage}[t][\paperheight-5mm][t]{\paperwidth-15mm}%
+      {\raggedleft%
+      \sffamily%
+      \begin{large}%
+        Linköpings universitet | \@department\par
+        Examensarbete på \@thesistypename, \@thesiscredits hp | \@thesissubject\par%
+        20\@publicationyear\ | \isrn\par%
+      \end{large}}%
+      \vspace*{50mm}%
+      {\fontsize{25pt}{30pt}\selectfont\@titleswedish\par}%
+      -- {\fontsize{13pt}{15pt}\selectfont\@subtitleswedish\par}%
+      \hrulefill{}
+      \\{}
+      {\fontspec{Calibri Italic}{\fontsize{13pt}{15pt}\selectfont\@titleenglish\par}%
+      -- {\fontsize{13pt}{15pt}\selectfont\@subtitleenglish\par}}%
+
+      \vspace*{10mm}%
+      \begin{LARGE}\textbf{\@author}\par\end{LARGE}%
+      \vfill{}
+      \includegraphics[width=85mm]{liu_primary_black_sv}\hfill{}
+      \parbox{0.2\textwidth}{%
+        Linköpings universitet\\
+        SE--581 83 Linköping\\
+        013-28 10 00, \href{http://www.liu.se}{www.liu.se}}
+      
+    %  \end{minipage}
+      % }%
     }
-}
+  }
+
+
+% \renewcommand{\maketitle}{
+%    \copypagestyle{titlestyle}{plain}
+%    \makeevenfoot{titlestyle}{\ifxetex\fontspec{Times}\fi Linköpings
+%      universitet\\
+%    SE-581 83 Linköping, Sweden
+%    }{}{\ifxetex\fontspec{Times}\fi Linköpings universitet\\
+%    581 83 Linköping}
+%    \makeoddfoot{titlestyle}{\ifxetex\fontspec{Times}\fi Linköpings
+%      universitet\\
+%    SE-581 83 Linköping, Sweden
+%    }{}{\ifxetex\fontspec{Times}\fi Linköpings universitet\\
+%    581 83 Linköping}
+%    \thispagestyle{titlestyle}
+%     {\centering
+%       \ifxetex\fontspec{Times}\fi
+%       \fontsize{27pt}{27pt}\selectfont
+%       \@department\\
+%       \fontsize{18pt}{18pt}\selectfont
+%       \@departmentenglish\\[2\baselineskip]
+%       Examensarbete
+%       \\[\baselineskip]
+%       \fontsize{24pt}{24pt}\selectfont{\bfseries\swedishenglish{\@titleswedish}{\@titleenglish}}
+%       \\[\baselineskip]
+%       \fontsize{12pt}{12pt}\selectfont\swedishenglish{av}{by}
+%       \\[1.5\baselineskip]
+%       \fontsize{24pt}{24pt}\selectfont{\bfseries\@author}
+%       \vfill
+%       \fontsize{18pt}{18pt}\selectfont\isrn
+%       \vfill
+%       \@dateofpublication
+%       \vfill
+%       \centering{\includegraphics[width=1.1\textwidth]{titelsid-sv}}
+%       \\[.5\baselineskip]
+%     }
+% }
 \else
 \renewcommand{\maketitle}{
   {\center
@@ -611,7 +667,7 @@
   \clearpage}
 
 % Intro page for MSC theses
-\ifmsc
+\ifstudent
 \newcommand{\makeinsidepage}{
   \thispagestyle{empty}
   {\ifxetex\fontspec{Times}\fi\selectfont
@@ -679,7 +735,7 @@ Examinator: \@examiner}
 % Tryckmaterialets storlek
 \setstocksize{297mm}{210mm}
 % 
-\ifmsc
+\ifstudent
 \settrimmedsize{290mm}{205mm}{*}
 \settypeblocksize{*}{34pc}{1.618} % golden ratio
 \else
@@ -697,7 +753,7 @@ Examinator: \@examiner}
   % Beskär runt om: Centrera tryckytan på pappret
   \settrims{0.5\trimtop}{0.5\trimedge}
   % Inner margin 2cm
-\ifmsc
+\ifstudent
   \setlrmargins{*}{*}{1}
 \else
   \setlrmargins{*}{55pt}{*}
@@ -739,7 +795,7 @@ Examinator: \@examiner}
   \newpage
 \end{adjustwidth}
 
-  \ifmsc
+  \ifstudent
   \makeinsidepage
   \else
   \pagestyle{plain}
@@ -863,7 +919,7 @@ Examinator: \@examiner}
     \put(7,114){\@author}
 %%% Enbart för lic
     \iflic{\put(34,178){\scriptsize $\times$}}\fi
-    \ifmsc{\put(34,174){\scriptsize $\times$}}\fi
+    \ifstudent{\put(34,174){\scriptsize $\times$}}\fi
 
 %%% Språk
     \swedishenglish{\put(0.98,178.25){\scriptsize $\times$}}{\put(1,174){\scriptsize $\times$}}
@@ -873,7 +929,7 @@ Examinator: \@examiner}
   \pagestyle{plain}
 }
 
-\ifmsc
+\ifstudent
 \AtEndDocument{\cleartorecto%
 \thispagestyle{empty}
 \includepdf[pagecommand={\begin{tikzpicture}[remember picture,overlay]
