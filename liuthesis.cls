@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu May 12 11:12:29 2016 (+0200)
+%% Last-Updated: Thu May 19 12:20:22 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1018
+%%     Update #: 1115
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -59,6 +59,8 @@
 \else
 \RequirePackage[utf8]{inputenc}
 \fi
+
+\RequirePackage[absolute]{textpos}
 
 \createvariable{thesislanguage}
 \createvariable{faculty}
@@ -344,7 +346,6 @@
 \setcounter{article}{0}
 \renewcommand{\thearticle}{\Roman{article}}
 \includepdfset{pages=-}
-\RequirePackage[absolute]{textpos}
 \setlength{\TPVertModule}{2cm}
 \setlength{\TPHorizModule}{\paperwidth - 4.3cm}
 \newcommand{\papermark}{\@thepaper{} \thearticle}
@@ -507,12 +508,11 @@
 
 \ifstudent 
 \renewcommand*\maketitle{%
-  
   {\ifxetex\fontspec{Calibri}\fi
-  \vspace*{-22mm}%
-  \hspace*{-10mm}%
+%  \vspace*{-22mm}%
+% \hspace*{-10mm}%
 %  \noindent\parbox[l][0pt][t]{0pt}{%
-%    \begin{minipage}[t][\paperheight-5mm][t]{\paperwidth-15mm}%
+%    \begin{minipage}[t][\paperheight+5mm][t]{\paperwidth-15mm}%
       {\raggedleft%
       \sffamily%
       \begin{large}%
@@ -521,6 +521,8 @@
         20\@publicationyear\ | \isrn\par%
       \end{large}}%
       \vspace*{50mm}%
+      \hspace*{38mm}%
+\begin{minipage}[t]{\paperwidth-85mm}
       {\fontsize{25pt}{30pt}\selectfont\@titleswedish\par}%
       -- {\fontsize{13pt}{15pt}\selectfont\@subtitleswedish\par}%
       \hrulefill{}
@@ -529,15 +531,26 @@
       -- {\fontsize{13pt}{15pt}\selectfont\@subtitleenglish\par}}%
 
       \vspace*{10mm}%
-      \begin{LARGE}\textbf{\@author}\par\end{LARGE}%
-      \vfill{}
-      \includegraphics[width=85mm]{liu_primary_black_sv}\hfill{}
-      \parbox{0.2\textwidth}{%
-        Linköpings universitet\\
-        SE--581 83 Linköping\\
-        013-28 10 00, \href{http://www.liu.se}{www.liu.se}}
+      {\fontspec{Calibri}\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
+      }%
+      \vspace*{10mm}%
+      {\fontspec{Calibri}\fontsize{10pt}{11pt}\selectfont
+        \parbox{\textwidth}{Handledare:\@supervisor\\
+          Examinator:\@examiner}}%
+
+ \end{minipage}      
+\vfill{}
+\begin{textblock*}{\textwidth}(2cm,\paperheight-4cm)
+  \parbox{0.4\textwidth}{\includegraphics[width=85mm]{liu_primary_black_sv}}
+  \hspace*{32mm}
+  \parbox{0.5\textwidth}{\raggedleft%
+    \vspace*{4mm}
+    Linköpings universitet\\
+    SE--581 83 Linköping\\
+    013-28 10 00, \href{http://www.liu.se}{www.liu.se}}
+\end{textblock*}
+
       
-    %  \end{minipage}
       % }%
     }
   }
@@ -670,30 +683,45 @@
 \ifstudent
 \newcommand{\makeinsidepage}{
   \thispagestyle{empty}
-  {\ifxetex\fontspec{Times}\fi\selectfont
-  \setlength{\unitlength}{1mm}
-  \begin{picture}(170,20)(20,-20)
-    \put(0,5){Linköpings universitet}
-    \put(0,0){\@department}
-  \end{picture}
-  {\centering\fontsize{18pt}{18pt}\selectfont
- 
-Examensarbete
-\vfill
-\fontsize{24pt}{24pt}\selectfont{\bfseries\swedishenglish{\@titleswedish}{\@titleenglish}}
-\\[\baselineskip]
-\fontsize{12pt}{12pt}\selectfont\swedishenglish{av}{by}
-\\[1.5\baselineskip]
-\fontsize{24pt}{24pt}\selectfont{\bfseries\@author}
-\vfill
-\fontsize{18pt}{18pt}\selectfont\isrn
-\vfill
-\hfill\@dateofpublication\hfill
-}
-\vfill
-{\setlength{\parindent}{0pt}Handledare: \@supervisor\hfill\\
-Examinator: \@examiner}
-\vfill
+  {\ifxetex\fontspec{Calibri}\fi\selectfont
+
+\vspace*{2cm}
+ \section*{Upphovsrätt}
+\label{sec:upphovsratt}
+
+Detta dokument hålls tillgängligt på Internet – eller dess framtida ersättare – under 25 år från
+publiceringsdatum under förutsättning att inga extraordinära omständigheter uppstår.
+Tillgång till dokumentet innebär tillstånd för var och en att läsa, ladda ner, skriva ut enstaka kopior för
+enskilt bruk och att använda det oförändrat för ickekommersiell forskning och för undervisning.
+Överföring av upphovsrätten vid en senare tidpunkt kan inte upphäva detta tillstånd. All annan
+användning av dokumentet kräver upphovsmannens medgivande. För att garantera äktheten, säkerheten
+och tillgängligheten finns lösningar av teknisk och administrativ art.
+Upphovsmannens ideella rätt innefattar rätt att bli nämnd som upphovsman i den omfattning som god
+sed kräver vid användning av dokumentet på ovan beskrivna sätt samt skydd mot att dokumentet ändras
+eller presenteras i sådan form eller i sådant sammanhang som är kränkande för upphovsmannenslitterära
+eller konstnärliga anseende eller egenart.
+För ytterligare information om Linköping University Electronic Press se förlagets hemsida
+\href{http://www.ep.liu.se/}{http://www.ep.liu.se/}.
+\vspace*{2cm}
+\section*{Copyright}
+\label{sec:copyright}
+
+The publishers will keep this document online on the Internet – or its possible replacement – for a period
+of 25 years starting from the date of publication barring exceptional circumstances.
+The online availability of the document implies permanent permission for anyone to read, to
+download, or to print out single copies for his/hers own use and to use it unchanged for non-commercial
+research and educational purpose. Subsequent transfers of copyright cannot revoke this permission. All
+other uses of the document are conditional upon the consent of the copyright owner. The publisher has
+taken technical and administrative measures to assure authenticity, security and accessibility.
+According to intellectual property law the author has the right to be mentioned when his/her work is
+accessed as described above and to be protected against infringement.
+For additional information about the Linköping University Electronic Press and its procedures for
+publication and for assurance of document integrity, please refer to its www home page:
+\href{http://www.ep.liu.se/}{http://www.ep.liu.se/}.
+
+\vfill{}
+\copyright{} \@author
+\vfill{}
 }
 }
 \fi
@@ -759,10 +787,10 @@ Examinator: \@examiner}
   \setlrmargins{*}{55pt}{*}
 \fi
   % Övre marginal 2cm, den undre automatiskt beräknad
-  \setulmargins{*}{*}{1.618}
+  \setulmargins{2cm}{*}{*}
   % Avståndet till sidhuvud och sidfot
-  \setheadfoot{\baselineskip}{1.5\baselineskip}
-  \setheaderspaces{*}{*}{1.618}
+ % \setheadfoot{\baselineskip}{1.5\baselineskip}
+%  \setheaderspaces{*}{*}{1.618}
 }
 \resetlayout
 %
@@ -928,20 +956,6 @@ Examinator: \@examiner}
   \end{picture}
   \pagestyle{plain}
 }
-
-\ifstudent
-\AtEndDocument{\cleartorecto%
-\thispagestyle{empty}
-\includepdf[pagecommand={\begin{tikzpicture}[remember picture,overlay]
-    \begin{scope}[shift={(current page.south west)},every node/.style={anchor=base west}]
-        % Grid to help find the positions (remove in final version)
-        %
-        \node at (32mm,34mm) {\ifxetex\fontspec{Times}\fi\fontsize{12pt}{12pt}\selectfont\@author};
-    \end{scope}
-\end{tikzpicture}}]{copyright_exjobbsrapport}
-%  \includepdf{rygg-sv}
-}
-\fi
 
 \iflic
 \AtEndDocument{\cleartorecto%
