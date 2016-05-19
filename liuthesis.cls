@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu May 19 12:20:22 2016 (+0200)
+%% Last-Updated: Thu May 19 14:43:43 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1115
+%%     Update #: 1118
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -527,14 +527,14 @@
       -- {\fontsize{13pt}{15pt}\selectfont\@subtitleswedish\par}%
       \hrulefill{}
       \\{}
-      {\fontspec{Calibri Italic}{\fontsize{13pt}{15pt}\selectfont\@titleenglish\par}%
+      {\ifxetex\fontspec{Calibri Italic}\fi{\fontsize{13pt}{15pt}\selectfont\@titleenglish\par}%
       -- {\fontsize{13pt}{15pt}\selectfont\@subtitleenglish\par}}%
 
       \vspace*{10mm}%
-      {\fontspec{Calibri}\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
+      {\ifxetex\fontspec{Calibri}\fi\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
       }%
       \vspace*{10mm}%
-      {\fontspec{Calibri}\fontsize{10pt}{11pt}\selectfont
+      {\ifxetex\fontspec{Calibri}\fi\fontsize{10pt}{11pt}\selectfont
         \parbox{\textwidth}{Handledare:\@supervisor\\
           Examinator:\@examiner}}%
 
