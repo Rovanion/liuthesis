@@ -1,6 +1,6 @@
 LiU Thesis class
 
-Ola Leifler, ola.leifler@liu.se, 110523
+Ola Leifler, ola.leifler@liu.se, 2011-2016
 
 ** Package options **
 
@@ -30,6 +30,10 @@ xunicode and xltxtra packages are loaded. All manuscript files should
 be written with UTF-8 encoding. When PDFLaTeX is used as the
 typsetting engine, the babel, palatino and mathpazo packages are used
 instead.
+
+Note that for correct typesetting of the front matter, XeTeX must be
+used as a typesettings engine on a platform where the proprietary
+fonts Calibri and Calibri Italicare available.
 
 The BibLaTeX package is used for managing references. Currently, there
 is no way to specify the load-time options to biblatex as document
