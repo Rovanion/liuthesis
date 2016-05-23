@@ -535,8 +535,8 @@
       }%
       \vspace*{10mm}%
       {\ifxetex\fontspec{Calibri}\fi\fontsize{10pt}{11pt}\selectfont
-        \parbox{\textwidth}{Handledare:\@supervisor\\
-          Examinator:\@examiner}}%
+        \parbox{\textwidth}{Handledare: \@supervisor\\
+          Examinator: \@examiner}}%
 
  \end{minipage}      
 \vfill{}
