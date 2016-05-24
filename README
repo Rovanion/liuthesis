@@ -8,7 +8,8 @@ The following options are recognized by the liuthesis document class
 
 phd - For dissertations 
 lic - For licentiate theses
-msc - For Master's theses (default)
+msc - For Masters' theses (default)
+bachelor - For Bachelors' theses
 
 hu     - For the medical sciences
 filfak - For the humanities
