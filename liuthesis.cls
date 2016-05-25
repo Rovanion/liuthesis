@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu May 19 14:43:43 2016 (+0200)
+%% Last-Updated: Wed May 25 16:49:52 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1118
+%%     Update #: 1124
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -89,7 +89,8 @@
 % Undergrad specific
 \createvariable{area}
 \createvariable{level}
-\createvariable{thesistypename}
+\createvariable{thesistypenameswedish}
+\createvariable{thesistypenameenglish}
 \createvariable{thesiscredits}
 \createvariable{thesissubject}
 
@@ -115,6 +116,8 @@
 \licfalse
 \newif\ifstudent
 \studenttrue
+\newif\ifprinterfriendly
+\printerfriendlyfalse
 
 \DeclareOption{hu}{%
   \hutrue
@@ -156,7 +159,8 @@
   \phdfalse
   \licfalse
   \level{A}
-  \gdef\@thesistypename{avancerad nivå}
+  \gdef\@thesistypenameenglish{Master}
+  \gdef\@thesistypenameswedish{avancerad nivå}
   \thesiscredits{30}
   \PassOptionsToClass{oneside}{memoir}
 }
@@ -166,7 +170,8 @@
   \phdfalse
   \licfalse
   \level{G}
-  \gdef\@thesistypename{grundnivå}
+  \gdef\@thesistypenameenglish{Bachelor}
+  \gdef\@thesistypenameswedish{grundnivå}
   \thesiscredits{16}
   \PassOptionsToClass{oneside}{memoir}
 }
@@ -183,15 +188,8 @@
   \phdtrue
 }
 
-\DeclareOption{swedish}{%
- \thesislanguage{swedish}
-  \gdef\@thepaper{Artikel}
-}
-
-
-\DeclareOption{english}{%
-  \thesislanguage{english}
-  \gdef\@thepaper{Paper}
+\DeclareOption{printerfriendly}{%
+  \printerfriendlytrue
 }
 
 \newif\ifexhibitpage
@@ -515,39 +513,62 @@
 %    \begin{minipage}[t][\paperheight+5mm][t]{\paperwidth-15mm}%
       {\raggedleft%
       \sffamily%
+      \swedishenglish{%
       \begin{large}%
         Linköpings universitet | \@department\par
-        Examensarbete på \@thesistypename, \@thesiscredits hp | \@thesissubject\par%
+        Examensarbete på \@thesistypenameswedish, \@thesiscredits hp | \@thesissubject\par%
         20\@publicationyear\ | \isrn\par%
-      \end{large}}%
+      \end{large}%
+      }{%
+      \begin{large}%
+        Linköping University | \@departmentenglish\par
+        \@thesistypenameenglish{} thesis, \@thesiscredits{} ECTS | \@thesissubject\par%
+        20\@publicationyear\ | \isrn\par%
+      \end{large}%
+      }%
+      }%
       \vspace*{50mm}%
-      \hspace*{38mm}%
-\begin{minipage}[t]{\paperwidth-85mm}
-      {\fontsize{25pt}{30pt}\selectfont\@titleswedish\par}%
-      -- {\fontsize{13pt}{15pt}\selectfont\@subtitleswedish\par}%
+      \swedishenglish{%
+        \hspace*{36mm}%
+      }{%
+        \hspace*{38mm}%
+      }%
+      \newlength{\thesiswidth}%
+      \swedishenglish{%
+        \setlength{\thesiswidth}{\paperwidth-86mm}%
+      }{%
+        \setlength{\thesiswidth}{\paperwidth-88mm}%
+      }%
+\begin{minipage}[t]{\thesiswidth}
+      {\fontsize{25pt}{30pt}\selectfont\swedishenglish{\@titleswedish}{\@titleenglish}\par}%
+      -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleswedish}{\@subtitleenglish}\par}%
       \hrulefill{}
       \\{}
-      {\ifxetex\fontspec{Calibri Italic}\fi{\fontsize{13pt}{15pt}\selectfont\@titleenglish\par}%
-      -- {\fontsize{13pt}{15pt}\selectfont\@subtitleenglish\par}}%
+      {\ifxetex\fontspec{Calibri Italic}\fi{\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@titleenglish}{\@titleswedish}\par}%
+      -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}\par}}%
 
       \vspace*{10mm}%
       {\ifxetex\fontspec{Calibri}\fi\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
       }%
       \vspace*{10mm}%
       {\ifxetex\fontspec{Calibri}\fi\fontsize{10pt}{11pt}\selectfont
-        \parbox{\textwidth}{Handledare: \@supervisor\\
-          Examinator: \@examiner}}%
+        \parbox{\textwidth}{\swedishenglish{Handledare}{Supervisor}: \@supervisor\\
+          \swedishenglish{Examinator}{Examiner}: \@examiner}}%
 
- \end{minipage}      
+ \end{minipage}
 \vfill{}
 \begin{textblock*}{\textwidth}(2cm,\paperheight-4cm)
-  \parbox{0.4\textwidth}{\includegraphics[width=85mm]{liu_primary_black_sv}}
+  \swedishenglish{%
+    \parbox{0.4\textwidth}{\includegraphics[width=85mm]{liu_primary_black_sv}}%
+  }{%
+    \parbox{0.4\textwidth}{\includegraphics[width=85mm]{liu_primary_black_en}}%
+  }%
   \hspace*{32mm}
   \parbox{0.5\textwidth}{\raggedleft%
     \vspace*{4mm}
     Linköpings universitet\\
     SE--581 83 Linköping\\
-    013-28 10 00, \href{http://www.liu.se}{www.liu.se}}
+    \swedishenglish{013-28 10 00}{+46 13 28 10 00}, \href{http://www.liu.se}{www.liu.se}}
 \end{textblock*}
 
       
@@ -781,6 +802,9 @@ publication and for assurance of document integrity, please refer to its www hom
   % Beskär runt om: Centrera tryckytan på pappret
   \settrims{0.5\trimtop}{0.5\trimedge}
   % Inner margin 2cm
+  \ifprinterfriendly
+  \renewcommand{\clearforchapter}{\cleartooddpage}
+  \fi
 \ifstudent
   \setlrmargins{*}{*}{1}
 \else
@@ -847,7 +871,10 @@ publication and for assurance of document integrity, please refer to its www hom
   \listoffigures
   \clearpage{}
   \listoftables
-  \cleartorecto%
+  %\cleartorecto% Does not work for some reason
+  \ifprinterfriendly
+  \cleartooddpage
+  \fi
   \pagenumbering{arabic}
   \pagestyle{ruled}
 }
