@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu May 19 14:43:43 2016 (+0200)
+%% Last-Updated: Wed May 25 16:49:52 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1118
+%%     Update #: 1124
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -521,8 +521,8 @@
       \end{large}%
       }{%
       \begin{large}%
-        Linköpings University | \@departmentenglish\par
-        \@thesistypenameenglish thesis, \@thesiscredits ECTS | \@thesissubject\par%
+        Linköping University | \@departmentenglish\par
+        \@thesistypenameenglish{} thesis, \@thesiscredits{} ECTS | \@thesissubject\par%
         20\@publicationyear\ | \isrn\par%
       \end{large}%
       }%
@@ -552,10 +552,10 @@
       }%
       \vspace*{10mm}%
       {\ifxetex\fontspec{Calibri}\fi\fontsize{10pt}{11pt}\selectfont
-        \parbox{\textwidth}{Handledare: \@supervisor\\
-          Examinator: \@examiner}}%
+        \parbox{\textwidth}{\swedishenglish{Handledare}{Supervisor}: \@supervisor\\
+          \swedishenglish{Examinator}{Examiner}: \@examiner}}%
 
- \end{minipage}      
+ \end{minipage}
 \vfill{}
 \begin{textblock*}{\textwidth}(2cm,\paperheight-4cm)
   \swedishenglish{%
@@ -568,7 +568,7 @@
     \vspace*{4mm}
     Linköpings universitet\\
     SE--581 83 Linköping\\
-    013-28 10 00, \href{http://www.liu.se}{www.liu.se}}
+    \swedishenglish{013-28 10 00}{+46 13 28 10 00}, \href{http://www.liu.se}{www.liu.se}}
 \end{textblock*}
 
       
