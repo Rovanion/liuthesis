@@ -21,6 +21,9 @@ exhibitpage - Produce an exhibit page (spikblad) and no thesis. Use
 
 printerfriendly - ensure chapters begin on recto pages
 
+swedish - use Swedish as the main language, English as the secondary language
+english - use English as the main language
+
 plus all the options recognized by the memoir package, which liuthesis extends.
 
 

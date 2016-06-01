@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Wed May 25 16:49:52 2016 (+0200)
+%% Last-Updated: Wed Jun  1 17:19:35 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1124
+%%     Update #: 1127
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -192,6 +192,14 @@
   \printerfriendlytrue
 }
 
+\DeclareOption{swedish}{%
+  \thesislanguage{swedish}
+}
+
+\DeclareOption{english}{%
+  \thesislanguage{english}
+}
+
 \newif\ifexhibitpage
 \exhibitpagefalse
 
@@ -294,7 +302,7 @@
 \RequirePackage{csquotes}
 \ifxetex
 \swedishenglish{
-  \RequirePackage[swedish,english]{polyglossia}
+  \RequirePackage{polyglossia}
   \setmainlanguage{swedish}
   \setotherlanguages{english}
 }{
