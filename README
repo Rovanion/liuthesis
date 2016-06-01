@@ -19,6 +19,8 @@ exhibitpage - Produce an exhibit page (spikblad) and no thesis. Use
 	      this option to produce an exhibit page only for PhD
 	      dissertations.
 
+printerfriendly - ensure chapters begin on recto pages
+
 plus all the options recognized by the memoir package, which liuthesis extends.
 
 
@@ -59,6 +61,9 @@ provides an example of how this works.
 
 Abstract.tex is a mandatory file with your abstract, other files can
 be included at will from your main thesis file.
+
+For further usage instructions, please refer to demothesis.tex that
+provides a minimal example of an undergraduate thesis.
 
 ** Including articles **
 
