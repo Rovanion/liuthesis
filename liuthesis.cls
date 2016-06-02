@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Wed Jun  1 17:19:35 2016 (+0200)
+%% Last-Updated: Thu Jun  2 16:17:57 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1127
+%%     Update #: 1133
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -52,6 +52,13 @@
   \expandafter\def\csname #1\endcsname{\expandafter\gdef\csname @#1\endcsname}
   \csname #1\endcsname{\texttt{\textbackslash #1}}
 }
+
+% \def\createconditionalvariable#1{
+%   \expandafter\newif\csname if#1\endcsname
+%   \csname #1 false\endcsname
+%   \def\csname#1\endcsname
+% }
+
 \RequirePackage{xkeyval}
 \RequirePackage{ifxetex}
 
@@ -94,12 +101,18 @@
 \createvariable{thesiscredits}
 \createvariable{thesissubject}
 
-\createvariable{subtitleswedish}
-\createvariable{subtitleenglish}
+\newif\ifsubtitleswedish
+\subtitleswedishfalse
+\def\subtitleswedish#1{\subtitleswedishtrue\gdef\@subtitleswedish{#1}}
+
+\newif\ifsubtitleenglish
+\subtitleenglishfalse
+\def\subtitleenglish#1{\subtitleenglishtrue\gdef\@subtitleenglish{#1}}
 
 \newif\ifdedication
 \dedicationfalse
 \def\dedication#1{\dedicationtrue\gdef\@dedication{#1}}
+
 \createvariable{divanumber}
 % Include the abstract
 \gdef\@abstract{\input{abstract}}
@@ -549,11 +562,13 @@
       }%
 \begin{minipage}[t]{\thesiswidth}
       {\fontsize{25pt}{30pt}\selectfont\swedishenglish{\@titleswedish}{\@titleenglish}\par}%
-      -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleswedish}{\@subtitleenglish}\par}%
+      \swedishenglish{\ifsubtitleswedish}{\ifsubtitleenglish} -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleswedish}{\@subtitleenglish}\par}\fi%
       \hrulefill{}
       \\{}
       {\ifxetex\fontspec{Calibri Italic}\fi{\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@titleenglish}{\@titleswedish}\par}%
-      -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}\par}}%
+        \swedishenglish{\ifsubtitleenglish}{\ifsubtitleswedish}--
+        {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}\par}
+      \fi}%
 
       \vspace*{10mm}%
       {\ifxetex\fontspec{Calibri}\fi\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
