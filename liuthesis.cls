@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu Jun  2 16:17:57 2016 (+0200)
+%% Last-Updated: Tue Jun 21 13:27:01 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1133
+%%     Update #: 1140
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -880,13 +880,15 @@ publication and for assurance of document integrity, please refer to its www hom
   \makededicationpage
   \fi
   \cleartorecto%
- \addcontentsline{toc}{chapter}{Abstract}
+\swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
+{\addcontentsline{toc}{chapter}{Abstract}}
+
  \begin{abstract}
    \@abstract
  \end{abstract}
   \newpage
-  \chapter*{Acknowledgments}
-  \addcontentsline{toc}{chapter}{Acknowledgments}
+  \swedishenglish{\addcontentsline{toc}{chapter}{Författarens tack}}
+  {\addcontentsline{toc}{chapter}{Acknowledgments}}
   \@acknowledgments
   \clearpage
   \tableofcontents
