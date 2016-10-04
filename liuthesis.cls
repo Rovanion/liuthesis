@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Tue Jun 21 13:27:01 2016 (+0200)
+%% Last-Updated: Tue Oct  4 11:57:14 2016 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1140
+%%     Update #: 1144
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -68,6 +68,9 @@
 \fi
 
 \RequirePackage[absolute]{textpos}
+
+% For conditionally including lists of tables and figures
+\RequirePackage[figure,table]{totalcount}
 
 \createvariable{thesislanguage}
 \createvariable{faculty}
@@ -509,7 +512,7 @@
   \clearpage{}
   {\ifxetex\fontspec{Times}\fi
     \begin{abstract}
-      {\footnotesize \@abstract}
+      {\small \@abstract}
     \end{abstract}
  }
 }
@@ -891,11 +894,9 @@ publication and for assurance of document integrity, please refer to its www hom
   {\addcontentsline{toc}{chapter}{Acknowledgments}}
   \@acknowledgments
   \clearpage
-  \tableofcontents
-  \clearpage{}
-  \listoffigures
-  \clearpage{}
-  \listoftables
+  \tableofcontents  
+  \iftotalfigures \clearpage{}\listoffigures\fi 
+  \iftotaltables \clearpage{}\listoftables\fi
   %\cleartorecto% Does not work for some reason
   \ifprinterfriendly
   \cleartooddpage
