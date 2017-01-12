@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Tue Oct  4 11:57:14 2016 (+0200)
+%% Last-Updated: Thu Jan 12 14:31:16 2017 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 1144
+%%     Update #: 1172
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -352,7 +352,7 @@
   \rotatebox{90}{% 
     \resizebox{%
       \heightof{\usebox{\feline@article}}+\depthof{\usebox{\feline@article}}}% 
-    {!}{{\scshape \MakeUppercase\@thepaper}}}\quad%
+    {!}{{\scshape \MakeUppercase Paper}}}\quad%
   \raisebox{\depthof{\usebox{\feline@article}}}{\usebox{\feline@article}}%
 } 
 \newcommand\feline@chm[1][4cm]{%
@@ -370,7 +370,7 @@
 \includepdfset{pages=-}
 \setlength{\TPVertModule}{2cm}
 \setlength{\TPHorizModule}{\paperwidth - 4.3cm}
-\newcommand{\papermark}{\@thepaper{} \thearticle}
+\newcommand{\papermark}{Paper \thearticle}
 
 \newcommand{\includearticle}[2][pages=-]{%
   \@twosidetrue
@@ -523,18 +523,13 @@
 \iflic
 \newcommand{\isrn}{LIU-\@facultyshort{}-Lic-{}-\@publicationyear:\@currentyearthesisnumber}
 \fi
+
 \ifstudent
 \newcommand{\isrn}{LIU-\@departmentshort{}/\@area{}-EX-\@level{}-{}-\@publicationyear/\@currentyearthesisnumber-{}-SE}
 \fi
 
-
-\ifstudent 
-\renewcommand*\maketitle{%
+\newcommand\makeundergraduatetitle{%
   {\ifxetex\fontspec{Calibri}\fi
-%  \vspace*{-22mm}%
-% \hspace*{-10mm}%
-%  \noindent\parbox[l][0pt][t]{0pt}{%
-%    \begin{minipage}[t][\paperheight+5mm][t]{\paperwidth-15mm}%
       {\raggedleft%
       \sffamily%
       \swedishenglish{%
@@ -572,7 +567,6 @@
         \swedishenglish{\ifsubtitleenglish}{\ifsubtitleswedish}--
         {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}\par}
       \fi}%
-
       \vspace*{10mm}%
       {\ifxetex\fontspec{Calibri}\fi\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
       }%
@@ -580,7 +574,6 @@
       {\ifxetex\fontspec{Calibri}\fi\fontsize{10pt}{11pt}\selectfont
         \parbox{\textwidth}{\swedishenglish{Handledare}{Supervisor}: \@supervisor\\
           \swedishenglish{Examinator}{Examiner}: \@examiner}}%
-
  \end{minipage}
 \vfill{}
 \begin{textblock*}{\textwidth}(2cm,\paperheight-4cm)
@@ -596,50 +589,10 @@
     SE--581 83 Linköping\\
     \swedishenglish{013-28 10 00}{+46 13 28 10 00}, \href{http://www.liu.se}{www.liu.se}}
 \end{textblock*}
-
-      
-      % }%
     }
   }
 
-
-% \renewcommand{\maketitle}{
-%    \copypagestyle{titlestyle}{plain}
-%    \makeevenfoot{titlestyle}{\ifxetex\fontspec{Times}\fi Linköpings
-%      universitet\\
-%    SE-581 83 Linköping, Sweden
-%    }{}{\ifxetex\fontspec{Times}\fi Linköpings universitet\\
-%    581 83 Linköping}
-%    \makeoddfoot{titlestyle}{\ifxetex\fontspec{Times}\fi Linköpings
-%      universitet\\
-%    SE-581 83 Linköping, Sweden
-%    }{}{\ifxetex\fontspec{Times}\fi Linköpings universitet\\
-%    581 83 Linköping}
-%    \thispagestyle{titlestyle}
-%     {\centering
-%       \ifxetex\fontspec{Times}\fi
-%       \fontsize{27pt}{27pt}\selectfont
-%       \@department\\
-%       \fontsize{18pt}{18pt}\selectfont
-%       \@departmentenglish\\[2\baselineskip]
-%       Examensarbete
-%       \\[\baselineskip]
-%       \fontsize{24pt}{24pt}\selectfont{\bfseries\swedishenglish{\@titleswedish}{\@titleenglish}}
-%       \\[\baselineskip]
-%       \fontsize{12pt}{12pt}\selectfont\swedishenglish{av}{by}
-%       \\[1.5\baselineskip]
-%       \fontsize{24pt}{24pt}\selectfont{\bfseries\@author}
-%       \vfill
-%       \fontsize{18pt}{18pt}\selectfont\isrn
-%       \vfill
-%       \@dateofpublication
-%       \vfill
-%       \centering{\includegraphics[width=1.1\textwidth]{titelsid-sv}}
-%       \\[.5\baselineskip]
-%     }
-% }
-\else
-\renewcommand{\maketitle}{
+\newcommand{\makegraduatetitle}{
   {\center
     {\footnotesize\centerline\@publicationseries{}%\\
       Dissertation No. \@thesisnumber}\\[25mm] 
@@ -649,7 +602,7 @@
      \vfill
 % \\[6mm]{\today}\\[105mm]
     \swedishenglish{\gdef\@langlogo{sv}}{\gdef\@langlogo{en}}
-    \includegraphics[width=35mm]{\@facultyshortlogo _\@langlogo _vert_blk}
+    \includegraphics[width=35mm]{liu_primary_black_\@langlogo}
    \\[12mm]
      {\footnotesize
      \swedishenglish{%
@@ -675,39 +628,38 @@
    }
    }
 }
+
+\ifstudent
+\renewcommand{\maketitle}{\makeundergraduatetitle}
+\else
+\renewcommand{\maketitle}{\makegraduatetitle}
 \fi
 
-% \newcommand{\abstractpage}{%
-% %  \enlargethispage{8mm}
-%   \vspace*{6mm}
-%   \begin{center}
-%     \Large\textbf{\swedishenglish{\@titleswedish}{\@titleenglish}}
-%   \end{center}
-%   { \setlength{\parindent}{0mm}
-%     \footnotesize
-%     \centerline{\swedishenglish{av}{by}}
-%     \vspace{3mm}
-%     \centerline{\@author}
-%     \vspace{5mm}
-%     \centerline{\@publicationmonth{} \@publicationyear}
-%     \centerline{ISBN \@isbn}
+\newcommand{\abstractpage}{%
+%  \enlargethispage{8mm}
+  \vspace*{6mm}
+  \begin{center}
+    \Large\textbf{\swedishenglish{\@titleswedish}{\@titleenglish}}
+  \end{center}
+  { \setlength{\parindent}{0mm}
+    \footnotesize
+    \centerline{\swedishenglish{av}{by}}
+    \vspace{3mm}
+    \centerline{\@author}
+    \vspace{5mm}
+    \centerline{\@publicationmonth{} \@publicationyear}
+    \centerline{ISBN \@isbn}
 
-%     \centerline{\@publicationseries}
-%     \centerline{Thesis No. \@thesisnumber}
-%     \centerline{ISSN \@issn}
-%    % \centerline{LiU--Tek--Lic--\@publicationyear:\@currentyearthesisnumber}
-%     \vspace{5mm}
-%     \setlength\parskip{8pt}\centerline{\swedishenglish{SAMMANFATTNING}{ABSTRACT}}
-%     \vspace{3mm}
-%     \footnotesize{\@abstract}
+    \centerline{\@publicationseries}
+    \centerline{Thesis No. \@thesisnumber}
+    \centerline{ISSN \@issn}
+    \vspace{5mm}
+    \setlength\parskip{8pt}\centerline{\swedishenglish{SAMMANFATTNING}{ABSTRACT}}
+    \vspace{3mm}
+    \footnotesize{\@abstract}
     
-%   %  \textit{\swedishenglish{Studien har finansierats av}{This work has been supported by} \@supportedby.}
-%  %   \vfill
-%  %   \centerline{\@department}
-%  %   \centerline{Faculty of Health Sciences, Link\"opings universitet}
-%  %   \centerline{\swedishenglish{581\,83 Link\"oping}{SE-581\,85 Link\"oping, Sweden}}
-%   }
-% }
+  }
+}
 
 \newcommand{\makepermissionpage}{
   \mbox{}
@@ -834,7 +786,7 @@ publication and for assurance of document integrity, please refer to its www hom
 \ifstudent
   \setlrmargins{*}{*}{1}
 \else
-  \setlrmargins{*}{55pt}{*}
+  \setlrmargins{*}{*}{1.5}
 \fi
   % Övre marginal 2cm, den undre automatiskt beräknad
   \setulmargins{2cm}{*}{*}
@@ -885,10 +837,13 @@ publication and for assurance of document integrity, please refer to its www hom
   \cleartorecto%
 \swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
 {\addcontentsline{toc}{chapter}{Abstract}}
-
- \begin{abstract}
-   \@abstract
- \end{abstract}
+\ifstudent
+\begin{abstract}
+  \@abstract
+\end{abstract}
+\else
+\abstractpage
+\fi
   \newpage
   \swedishenglish{\addcontentsline{toc}{chapter}{Författarens tack}}
   {\addcontentsline{toc}{chapter}{Acknowledgments}}

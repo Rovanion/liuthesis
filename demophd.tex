@@ -7,9 +7,9 @@
 %% Created: Thu Oct 14 12:52:20 2010 (CEST)
 %% Version: $Id$
 %% Version: 
-%% Last-Updated: Thu Jan 12 14:33:43 2017 (+0100)
+%% Last-Updated: Thu Jan 12 14:33:01 2017 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 155
+%%     Update #: 156
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -29,7 +29,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
 %%% Code:
-\documentclass[msc,lith,english]{liuthesis}
+\documentclass[phd,lith,english]{liuthesis}
 %% Settings go in settings.tex
 \include{settings}
 \usepackage{rotating}
@@ -40,8 +40,6 @@
 \department{Institutionen för datavetenskap}
 \departmentenglish{Department of Computer Science}
 \departmentshort{IDA}
-\supervisor{Min handledare}
-\examiner{Min examinator}
 \title{A very very long title}
 \subtitleenglish{with a subtitle}
 \thesissubject{Datateknik}
@@ -67,7 +65,9 @@
 \include{discussion}
 \include{conclusion}
 \printbibliography
-
+% Demonstrates the use of included publications, for graduate-level theses
+\includearticle{scigen}
+\includearticletex{scigen}
 \end{document}
 
 
