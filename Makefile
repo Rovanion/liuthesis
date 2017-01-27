@@ -3,7 +3,7 @@ SHELL=/bin/bash
 #The program that you use for viewing pdf files
 PDFVIEWER = evince
 # Change name of this if you change the name of demothesis.tex, should be name of the main tex file
-TEXMAINFILE = demothesis.tex
+TEXMAINFILE = demo_student_thesis.tex
 # Name that you would like for your resulting pdf file, without extension.
 # Defaults to $(TEXMAINFILE) with .pdf as extension
 PDFNAME = $(shell basename -s.tex $(TEXMAINFILE))
