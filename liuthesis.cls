@@ -858,9 +858,10 @@ publication and for assurance of document integrity, please refer to its www hom
   \tableofcontents  
   \iftotalfigures \clearpage{}\listoffigures\fi 
   \iftotaltables \clearpage{}\listoftables\fi
-  %\cleartorecto% Does not work for some reason
   \ifprinterfriendly
-  \cleartooddpage
+    \cleartooddpage
+  \else
+    \cleartorecto
   \fi
   \pagenumbering{arabic}
   \pagestyle{ruled}
