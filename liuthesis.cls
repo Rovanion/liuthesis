@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu Jan 12 14:31:16 2017 (+0100)
+%% Last-Updated: Tue Feb  7 12:59:24 2017 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 1172
+%%     Update #: 1177
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -115,6 +115,10 @@
 \newif\ifdedication
 \dedicationfalse
 \def\dedication#1{\dedicationtrue\gdef\@dedication{#1}}
+
+\newif\ifexternalsupervisor
+\externalsupervisorfalse
+\def\externalsupervisor#1{\externalsupervisortrue\gdef\@externalsupervisor{#1}}
 
 \createvariable{divanumber}
 % Include the abstract
@@ -573,7 +577,9 @@
       \vspace*{10mm}%
       {\ifxetex\fontspec{Calibri}\fi\fontsize{10pt}{11pt}\selectfont
         \parbox{\textwidth}{\swedishenglish{Handledare}{Supervisor}: \@supervisor\\
-          \swedishenglish{Examinator}{Examiner}: \@examiner}}%
+          \swedishenglish{Examinator}{Examiner}: \@examiner\\[2\baselineskip]
+        \ifexternalsupervisor \swedishenglish{Extern
+          handledare}{External supervisor}: \@externalsupervisor\fi}}%
  \end{minipage}
 \vfill{}
 \begin{textblock*}{\textwidth}(2cm,\paperheight-4cm)
