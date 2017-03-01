@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Tue Feb  7 12:59:24 2017 (+0100)
+%% Last-Updated: Wed Mar  1 12:06:45 2017 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 1177
+%%     Update #: 1178
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -877,7 +877,7 @@ publication and for assurance of document integrity, please refer to its www hom
   \begin{picture}(126,212)(6,-5)
     \fontsize{7}{8pt}\selectfont
 %% Universitetslogon:
-    \put(1,191){\includegraphics[width=20mm]{LinkUniv_staende_sv}}
+    \put(1,191){\includegraphics[width=20mm]{liu_secondary_black_sv}}
 %% Rutor:
     \put(0,190){\framebox(92,22)}  % dept, division etc
     \put(93,190){\framebox(33,22)} % date
