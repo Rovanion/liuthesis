@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Wed Mar  1 12:06:45 2017 (+0100)
+%% Last-Updated: Wed Mar  8 16:42:09 2017 (+0100)
 %%           By: Ola Leifler
-%%     Update #: 1178
+%%     Update #: 1180
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -498,7 +498,8 @@
     \@opponent
     \\[15mm]
     \swedishenglish{\gdef\@langlogo{sv}}{\gdef\@langlogo{en}}
-    \includegraphics[width=35mm]{\@facultyshortlogo _\@langlogo _vert_blk}
+    \swedishenglish{\gdef\@langlogo{sv}}{\gdef\@langlogo{en}}
+    \includegraphics[width=35mm]{liu_primary_black_\@langlogo}
     
     \vfill
     \@ifundefined{@supportedby}{}{\emph{\@supportedby}\\[3mm]}
@@ -583,11 +584,8 @@
  \end{minipage}
 \vfill{}
 \begin{textblock*}{\textwidth}(2cm,\paperheight-4cm)
-  \swedishenglish{%
-    \parbox{0.4\textwidth}{\includegraphics[width=85mm]{liu_primary_black_sv}}%
-  }{%
-    \parbox{0.4\textwidth}{\includegraphics[width=85mm]{liu_primary_black_en}}%
-  }%
+  \swedishenglish{\gdef\@langlogo{sv}}{\gdef\@langlogo{en}}
+  \parbox{0.4\textwidth}{\includegraphics[width=85mm]{liu_primary_black_\@langlogo}}%
   \hspace*{32mm}
   \parbox{0.5\textwidth}{\raggedleft%
     \vspace*{4mm}
