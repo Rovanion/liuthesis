@@ -841,8 +841,10 @@ publication and for assurance of document integrity, please refer to its www hom
   \makededicationpage
   \fi
   \cleartorecto%
+\phantomsection
 \swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
 {\addcontentsline{toc}{chapter}{Abstract}}
+\clearpage
 \ifstudent
 \begin{abstract}
   \@abstract
