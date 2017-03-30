@@ -841,8 +841,10 @@ publication and for assurance of document integrity, please refer to its www hom
   \makededicationpage
   \fi
   \cleartorecto%
+\phantomsection
 \swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
 {\addcontentsline{toc}{chapter}{Abstract}}
+\clearpage
 \ifstudent
 \begin{abstract}
   \@abstract
@@ -851,9 +853,10 @@ publication and for assurance of document integrity, please refer to its www hom
 \abstractpage
 \fi
   \newpage
+  \@acknowledgments
   \swedishenglish{\addcontentsline{toc}{chapter}{Författarens tack}}
   {\addcontentsline{toc}{chapter}{Acknowledgments}}
-  \@acknowledgments
+
   \clearpage
   \tableofcontents  
   \iftotalfigures \clearpage{}\listoffigures\fi 
