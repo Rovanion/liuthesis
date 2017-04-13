@@ -10,7 +10,11 @@ PDFNAME = $(shell basename -s.tex $(TEXMAINFILE))
 #Location of latexmk binary
 MKLATEX = latexmk
 #Options to latexmk, should need to be changed
-MKLATEXOPTS = -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make -jobname=$(PDFNAME)
+MKLATEXOPTS = -pdf -pdflatex="xelatex -interaction=nonstopmode" -use-make
+
+demos: demo_student_thesis.tex demo_lith_lic.tex demo_lith_phd.tex demo_filfak_lic.tex demo_filfak_phd.tex demo_exhibitpage_filfak.tex demo_exhibitpage_lith.tex
+	$(MKLATEX) $(MKLATEXOPTS) $?
+	mv demo*.pdf demo/
 
 all: $(PDFNAME).pdf
 
@@ -22,5 +26,4 @@ view: $(PDFNAME).pdf
 
 clean:
 	$(MKLATEX) -CA
-	rm -f $(PDFNAME).pdf settings.aux \
-           $(PDFNAME).{aux,bbl,bcf,blg,cb,fdb_latexmk,fls,lof,log,lot,out,run.xml,rel,synctex.gz,toc}
+	rm -f $(PDFNAME).pdf *.{aux,bbl,bcf,blg,cb,fdb_latexmk,fls,lof,log,lot,out,run.xml,rel,synctex.gz,toc}

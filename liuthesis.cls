@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Wed Mar  8 16:42:09 2017 (+0100)
+%% Last-Updated: Thu Apr 13 13:39:57 2017 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1180
+%%     Update #: 1410
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -72,12 +72,26 @@
 % For conditionally including lists of tables and figures
 \RequirePackage[figure,table]{totalcount}
 
+\createvariable{edition}
+\createvariable{presentationroom}
+\createvariable{presentationbuilding}
+\createvariable{presentationcampus}
+\createvariable{presentationdate}
+\createvariable{presentationdateenglish}
+\createvariable{presentationtime}
+
+
 \createvariable{thesislanguage}
 \createvariable{faculty}
 \createvariable{issn}
 \createvariable{degreeprefix}
+\createvariable{degreesuffix}
 \createvariable{exhibittext}
-\createvariable{opponent}
+\createvariable{exhibittextswedish}
+\createvariable{opponenttitle}
+\createvariable{opponentname}
+\createvariable{opponentuniversity}
+\createvariable{opponentcountry}
 \createvariable{thesisnumber}
 \createvariable{currentyearthesisnumber}
 \createvariable{supportedby}
@@ -89,6 +103,7 @@
 \createvariable{titleenglish}
 \createvariable{titleswedish}
 \createvariable{keywords}
+\createvariable{keywordsswedish}
 \createvariable{department}
 \createvariable{departmentenglish}
 \createvariable{departmentshort}
@@ -103,6 +118,7 @@
 \createvariable{thesistypenameenglish}
 \createvariable{thesiscredits}
 \createvariable{thesissubject}
+\createvariable{thesissubjectenglish}
 
 \newif\ifsubtitleswedish
 \subtitleswedishfalse
@@ -123,6 +139,7 @@
 \createvariable{divanumber}
 % Include the abstract
 \gdef\@abstract{\input{abstract}}
+\gdef\@sammanfattning{\input{sammanfattning.tex}}
 \gdef\@acknowledgments{\input{acknowledgments.tex}}
 
 \newif\iflith
@@ -169,7 +186,7 @@
   \faculty{Philosophical faculty}
   \gdef\@facultyshort{FilFak}
   \gdef\@facultyshortlogo{filfak}
-  \publicationseries{Linköping Studies in Arts and Science}
+  \publicationseries{Linköping Studies in Arts and Sciences}
   \degreeprefix{filosofie}
 %  \gdef\@area{FFK-UP}
 }
@@ -225,6 +242,7 @@
 
 \DeclareOption{exhibitpage}{%
   \exhibitpagetrue
+  \PassOptionsToClass{oneside}{memoir}
 }
 
 % % % Add the necessary biblatex options to the class options 
@@ -243,6 +261,17 @@
 \ExecuteOptions{english,phd,lith,a4paper}
 
 \ProcessOptions*
+
+%% There is a special exception to the rule that publication series
+%% are defined by the faculty, and that is the philosophical faculty
+%% that uses a special series for licentiate theses
+
+\iflic
+\iffilfak
+\publicationseries{Faculty of Arts and Sciences}
+\fi
+\fi
+
 \LoadClass{memoir}
 
 \RequirePackage{color}
@@ -281,9 +310,11 @@
 
 \ifphd
 \gdef\@degreetype{\@degreeprefix {} doktorsexamen}
+\gdef\@degreetypeenglish{Doctor of \@degreesuffix}
 \else
 \iflic
 \gdef\@degreetype{\@degreeprefix {} licentiatexamen}
+\gdef\@degreetypeenglish{Licentiate degree in \@degreesuffix}
 \fi
 \fi
 
@@ -296,24 +327,26 @@
 \fi
 \fi
 
+% We use the same series for lic and PhD at Filfak/HU
+
 \ifhu
-\ifphd
+% \ifphd
 \issn{0345-0082}  
-\fi
-\iflic
-\typeout{Please define the ISSN by issuing a \textbackslash issn command}
-\issn{\textbackslash\texttt{issn}}
-\fi
+% \fi
+% \iflic
+% \typeout{Please define the ISSN by issuing a \textbackslash issn command}
+% \issn{\textbackslash\texttt{issn}}
+% \fi
 \fi
 
 \iffilfak
-\ifphd
+% \ifphd
 \issn{0282-9800}
-\fi
-\iflic
-\typeout{Please define the ISSN by issuing a \textbackslash issn command}
-\issn{\textbackslash\texttt{issn}}
-\fi
+% \fi
+% \iflic
+% \typeout{Please define the ISSN by issuing a \textbackslash issn command}
+% \issn{\textbackslash\texttt{issn}}
+% \fi
 \fi
 
 \newcommand{\swedishenglish}[2]{
@@ -471,56 +504,144 @@
 
 \graphicspath{{figures/}}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                    %
+%                     font selection, based on availability                               %
+%                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\def\tryfonts#1#2{
+  \ifxetex
+  \def\primaryfont{''#1''} % first preferred font
+  \def\fallbackfont{"#2"} % if first font not avaliable
+  \count255=\interactionmode
+  \batchmode
+  \font\bodyfont=\primaryfont\space at 10pt
+  \ifx\bodyfont\nullfont
+    \font\bodyfont = \fallbackfont\space at 10pt
+    \ifx\bodyfont\nullfont
+      \errorstopmode
+      \errmessage{Neither #1 or #2 fonts installed, quitting..}
+    \else
+    \fontspec{#2}
+    \setmainfont{#2}
+    \fi
+    \else
+    \fontspec{#1}
+    \setmainfont{#1}
+  \fi
+  \interactionmode=\count255
+  \else
+      \errmessage{Please use XeTeX for typesetting in order to use TTF
+      fonts}
+  \fi
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                    %
 %                     The exhibit page                               %
 %                                                                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\exhibitpage}{%
-  {\ifxetex\fontspec{Times}\fi
+\newcommand{\exhibitpagelith}{%
+  \tryfonts{Times}{Times New Roman}
     \copypagestyle{exhibitpagestyle}{plain}
-    \makeevenfoot{exhibitpagestyle}{\ifxetex\fontspec{Times}\fi ISBN \@isbn}{}{\ifxetex\fontspec{Times}\fi ISSN \@issn}
-    \makeoddfoot{exhibitpagestyle}{\ifxetex\fontspec{Times}\fi ISBN \@isbn}{}{\ifxetex\fontspec{Times}\fi ISSN \@issn}
+    \makeevenfoot{exhibitpagestyle}{\tryfonts{Times}{Times New Roman} ISBN \@isbn}{}{\tryfonts{Times}{Times New Roman} ISSN \@issn}
+    \makeoddfoot{exhibitpagestyle}{\tryfonts{Times}{Times New Roman} ISBN \@isbn}{}{\tryfonts{Times}{Times New Roman} ISSN \@issn}
     \thispagestyle{exhibitpagestyle}
   \begin{center}
    {\footnotesize \@publicationseries}\\
-    {\footnotesize Dissertation No. \@thesisnumber}\\[15mm]
+    {\footnotesize \ifphd Dissertations,\else Licentiate Thesis\fi {} No. \@thesisnumber}\\[15mm]
     {\Large\bfseries\swedishenglish{\@titleswedish}{\@titleenglish}}\\[5mm]
     by\\[5mm]
     {\Large\bfseries\@author}
     \vfill
-    %% \\[6mm]{\today}\\[105mm]
-    {\small
-    \textbf{Akademisk avhandling}\\
-     \@ifundefined{@exhibittext}{\@abstract}{\@exhibittext}\\[6mm]
+    {\small\textbf{Akademisk avhandling}\\
+    som för framläggande av \@degreetype{} i \@thesissubject{}
+    vid Linköpings universitet kommer att offentligt försvaras i sal
+    \@presentationroom, hus \@presentationbuilding, universitetsområde
+    \@presentationcampus, \@presentationdate{} kl. \@presentationtime}\\[2\baselineskip]
     \textbf{Fakultetsopponent}\\
-    \@opponent
+    \@opponenttitle{} \@opponentname\\
+    \@opponentuniversity\\
+    \@opponentcountry
     \\[15mm]
-    \swedishenglish{\gdef\@langlogo{sv}}{\gdef\@langlogo{en}}
-    \swedishenglish{\gdef\@langlogo{sv}}{\gdef\@langlogo{en}}
-    \includegraphics[width=35mm]{liu_primary_black_\@langlogo}
-    
     \vfill
-    \@ifundefined{@supportedby}{}{\emph{\@supportedby}\\[3mm]}
- {\footnotesize URL
-   \texttt{http://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-\@divanumber/}\\[3mm] 
+    \includegraphics[width=35mm]{liu_primary_black_en}
+    \\[15mm]
    Linköping University\\
-  %\@faculty\\
-  \@department\\
+  \@departmentenglish\\
   \@division\\
-    SE--581\,85 Linköping\\[5mm]
-    Linköping \@publicationyear}}\\
+    SE--581 83 Linköping\\[5mm]
+    Linköping \@publicationyear\\
     \vspace*{1mm}
   \end{center}
   \clearpage{}
+  \tryfonts{Times}{Times New Roman}
+    \small \textbf{Abstract}\\
+    \@abstract
+    \vfill
+    \footnotesize
+    \begin{flushleft}
+      Keywords: \@keywords\\[3mm]
+      \@supportedby\mbox{}\\[3mm]
+      URL:    \texttt{http://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-\@divanumber/}\\[3mm] 
+    \end{flushleft}
+    
+  }
+
+
+\newcommand{\exhibitpagefilfak}{%
+  \begin{center}
+    \ifxetex\tryfonts{KorolevLiU}{Arial}\fi
+      \@publicationseries{} No. \@thesisnumber\\[3\baselineskip]
+      {\Large\@titleswedish\\
+        \@subtitleswedish}\\[5mm]\fi
+      \small
+      {\bfseries\@author}\\[5mm]
+    {\bfseries Akademisk avhandling}\\
+    som för framläggande av \@degreetype{} i \@thesissubject{}
+    vid Filosofiska fakulteten kommer att offentligt försvaras i sal
+    \@presentationroom, hus \@presentationbuilding, universitetsområde
+    \@presentationcampus, \@presentationdate{} kl. \@presentationtime\\[2\baselineskip]
+    {\bfseries Sammanfattning}\\
+    \@exhibittextswedish\\[6mm]
+    \vfill
+    \begin{flushleft}
+      Nyckelord: \@keywordsswedish\\[3mm]
+    \end{flushleft}
+    \includegraphics[width=35mm]{liu_primary_black_sv}\\
+    \@department\\
+    Linköpings universitet, 581 83 Linköping\\[5mm]
+    ISBN \@isbn{} ISSN \@issn
   \clearpage{}
-  {\ifxetex\fontspec{Times}\fi
-    \begin{abstract}
-      {\small \@abstract}
-    \end{abstract}
- }
-}
+  \normalsize
+   {\@publicationseries{} No. \@thesisnumber}\\[3\baselineskip]
+   {\Large\@titleenglish\\
+     \@subtitleenglish}\\[5mm]
+   \small
+   {\bfseries\@author}\\[5mm]
+    {\textbf{Academic dissertation}\\
+    Academic dissertation for the Degree of \@degreetypeenglish{} in \@thesissubjectenglish{}
+    at the Faculty of Arts and Sciences to be publicly defended on
+     \@presentationdateenglish{} at \@presentationtime{} in room
+    \@presentationroom, building \@presentationbuilding, campus
+    \@presentationcampus{} by \@author} 
+    \\[2\baselineskip]
+    {\bfseries Abstract}\\
+    \@abstract
+  \vfill
+  \begin{flushleft}
+    Keywords: \@keywords\\[3mm]
+  \end{flushleft}
+  \includegraphics[width=35mm]{liu_primary_black_en} \\
+    \@departmentenglish\\
+   Linköping University, SE--581 83 Linköping\\[5mm]
+    ISBN \@isbn{} ISSN \@issn
+  \end{center}
+  \clearpage{}
 }
 
 \newcommand{\gettitle}{\swedishenglish{\@titleswedish}{\@titleenglish}}
@@ -534,7 +655,7 @@
 \fi
 
 \newcommand\makeundergraduatetitle{%
-  {\ifxetex\fontspec{Calibri}\fi
+  {\tryfonts{Calibri}{Arial}
       {\raggedleft%
       \sffamily%
       \swedishenglish{%
@@ -597,9 +718,14 @@
   }
 
 \newcommand{\makegraduatetitle}{
+  \ifxetex\tryfonts{KorolevLiU}{Arial}
   {\center
     {\footnotesize\centerline\@publicationseries{}%\\
-      Dissertation No. \@thesisnumber}\\[25mm] 
+      \ifphd
+      Dissertations, 
+      \else
+      Licentiate Thesis
+      \fi No.  \@thesisnumber}\\[25mm] 
      {\LARGE\bfseries\gettitle}\\[20mm]
 % \swedishenglish{av}{by}
      {\Large\bfseries\@author}\\
@@ -616,16 +742,12 @@
      \fi
      \@department%\\
      Linköping universitet%\\
-     581\,85 Linköping%
+     581 83 Linköping%
      }{%
-       \iflic
-       Submitted to \@faculty{} at Linköping University in partial\\
-       fulfilment of the requirements for the degree of \@degreetype\\[6mm]
-       \fi
        Linköping University\\
-       \@department\\
+       \@departmentenglish\\
        \@division\\
-       SE-581\,85 Linköping, Sweden\\
+       SE-581 83 Linköping, Sweden\\
      }
     \vspace*{5mm}
      Linköping \@publicationyear\\
@@ -639,36 +761,52 @@
 \renewcommand{\maketitle}{\makegraduatetitle}
 \fi
 
-\newcommand{\abstractpage}{%
-%  \enlargethispage{8mm}
+\newcommand{\abstractpages}{%
+\ifphd
   \vspace*{6mm}
-  \begin{center}
-    \Large\textbf{\swedishenglish{\@titleswedish}{\@titleenglish}}
-  \end{center}
   { \setlength{\parindent}{0mm}
-    \footnotesize
-    \centerline{\swedishenglish{av}{by}}
+    \setlength\parskip{8pt}\centerline{POPULÄRVETENSKAPLIG SAMMANFATTNING}
     \vspace{3mm}
-    \centerline{\@author}
-    \vspace{5mm}
-    \centerline{\@publicationmonth{} \@publicationyear}
-    \centerline{ISBN \@isbn}
-
-    \centerline{\@publicationseries}
-    \centerline{Thesis No. \@thesisnumber}
-    \centerline{ISSN \@issn}
-    \vspace{5mm}
-    \setlength\parskip{8pt}\centerline{\swedishenglish{SAMMANFATTNING}{ABSTRACT}}
+    \footnotesize{\@sammanfattning}    
+  }
+\fi
+  \newpage
+  \vspace*{6mm}
+  { \setlength{\parindent}{0mm}
+    \setlength\parskip{8pt}\centerline{ABSTRACT}
     \vspace{3mm}
-    \footnotesize{\@abstract}
-    
+    \footnotesize{\@abstract}    
   }
 }
 
 \newcommand{\makepermissionpage}{
   \mbox{}
+  \iffilfak
+  \ifphd
+  \hspace{-\parindent}
+  At the Faculty of Arts and Sciences at Linköping University,
+  research and doctoral studies are carried out within broad problem
+  areas. Research is organized in interdisciplinary research
+  environments and doctoral studies mainly in graduate
+  schools. Jointly, they publish the series Linköping Studies in Arts
+  and Sciences. This thesis comes from \@division{} at the \@departmentenglish.
+  \fi
+  \fi
+  \iflic
+  \vfill
+  \begin{center}
+    {\small
+    This is a Swedish Licentiate’s Thesis\\[2\baselineskip]
+    Swedish postgraduate education leads to a doctor’s degree and/or a
+    licentiate’s degree.\\
+    A doctor’s degree comprises 240 ECTS credits
+    (4 years of full-time studies).\\
+    A licentiate’s degree comprises 120 ECTS credits.}
+  \end{center}
+  \fi
   \vfill
   \begin{flushleft}
+    Edition \@edition\\[5mm]
     \copyright{} \@author, \@publicationyear\\
     ISBN \@isbn\\
     ISSN \@issn\\
@@ -683,7 +821,6 @@
   \clearpage}
 
 % Intro page for MSC theses
-\ifstudent
 \newcommand{\makeinsidepage}{
   \thispagestyle{empty}
   {\ifxetex\fontspec{Calibri}\fi\selectfont
@@ -727,7 +864,7 @@ publication and for assurance of document integrity, please refer to its www hom
 \vfill{}
 }
 }
-\fi
+
 
 \newcommand{\makededicationpage}{
 \mbox{}
@@ -770,8 +907,9 @@ publication and for assurance of document integrity, please refer to its www hom
 \settrimmedsize{290mm}{205mm}{*}
 \settypeblocksize{*}{34pc}{1.618} % golden ratio
 \else
+% S5 report size
 \settrimmedsize {242mm}{165mm}{*}
-\settypeblocksize{*}{28pc}{1.7}
+\settypeblocksize{*}{28pc}{1.618}
 \fi
 
 \newcommand{\resetlayout}{
@@ -787,18 +925,14 @@ publication and for assurance of document integrity, please refer to its www hom
   \ifprinterfriendly
   \renewcommand{\clearforchapter}{\cleartooddpage}
   \fi
-\ifstudent
+  \ifstudent
   \setlrmargins{*}{*}{1}
-\else
+  \else
   \setlrmargins{*}{*}{1.5}
-\fi
+  \fi
   % Övre marginal 2cm, den undre automatiskt beräknad
   \setulmargins{2cm}{*}{*}
-  % Avståndet till sidhuvud och sidfot
- % \setheadfoot{\baselineskip}{1.5\baselineskip}
-%  \setheaderspaces{*}{*}{1.618}
 }
-\resetlayout
 %
 % Common layout settings
 
@@ -815,11 +949,15 @@ publication and for assurance of document integrity, please refer to its www hom
 %% Load user settings from the file settings.tex
 
 \AtBeginDocument{%
-  % \newcommand{\makeintropages}{%
- \checkandfixthelayout
+  \resetlayout  
+  \checkandfixthelayout
   \pagestyle{empty}
   \ifexhibitpage
-  \exhibitpage%
+  \iflith
+  \exhibitpagelith
+  \else
+  \exhibitpagefilfak
+  \fi
 \end{document}%
 \endinput%
 \fi
@@ -839,19 +977,22 @@ publication and for assurance of document integrity, please refer to its www hom
   \makededicationpage
   \fi
   \cleartorecto%
-\swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
-{\addcontentsline{toc}{chapter}{Abstract}}
+  \phantomsection
+  \swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
+  {\addcontentsline{toc}{chapter}{Abstract}}
+\clearpage
 \ifstudent
 \begin{abstract}
   \@abstract
 \end{abstract}
 \else
-\abstractpage
+\abstractpages
 \fi
+\clearpage
   \newpage
+  \@acknowledgments
   \swedishenglish{\addcontentsline{toc}{chapter}{Författarens tack}}
   {\addcontentsline{toc}{chapter}{Acknowledgments}}
-  \@acknowledgments
   \clearpage
   \tableofcontents  
   \iftotalfigures \clearpage{}\listoffigures\fi 
@@ -864,117 +1005,6 @@ publication and for assurance of document integrity, please refer to its www hom
   \pagenumbering{arabic}
   \pagestyle{ruled}
 }
-
-\def\librarypage{
-%%% Biblioteksblad som används för licentiatavhandlingar
-%%% -------------------------
-  \enlargethispage{30mm}
-  \thispagestyle{empty}
-  \scriptsize
-  \setlength{\unitlength}{1mm}
-  \begin{picture}(126,212)(6,-5)
-    \fontsize{7}{8pt}\selectfont
-%% Universitetslogon:
-    \put(1,191){\includegraphics[width=20mm]{liu_secondary_black_sv}}
-%% Rutor:
-    \put(0,190){\framebox(92,22)}  % dept, division etc
-    \put(93,190){\framebox(33,22)} % date
-    \put(0,157){\framebox(32,32)}  % language
-    \put(33,157){\framebox(33,32)} % report category
-    \put(67,143){\framebox(59,46)} % isbn etc
-    \put(0,143){\framebox(66,13)}  % url
-    \put(0,108){\framebox(126,34)} % title
-    \put(0,12){\framebox(126,95)}   % abstract
-    \put(0,0){\framebox(126,11)}    % keywords
-%% Rubriker:
-    \put(27,209){{\bfseries Avdelning, Institution}}
-    \put(27,206){Division, Department}
-    \put(94,209){{\bfseries Datum}}
-    \put(94,206){Date}
-    \put(1,186){{\bfseries Språk}}
-    \put(1,182){Language}
-    \put(1,178){$\emptybox$ Svenska/Swedish}
-    \put(1,174){$\emptybox$ Engelska/English}
-    \put(1,162){$\emptybox$}
-    \put(5,162){\line(1,0){20}}
-
-    \put(34,186){{\bfseries Rapporttyp}}
-    \put(34,183){Report category}
-    \put(34,178){$\emptybox$ Licentiatavhandling}
-    \put(34,174){$\emptybox$ Examensarbete}
-    \put(34,170){$\emptybox$ C-uppsats}
-    \put(34,166){$\emptybox$ D-uppsats}
-    \put(34,162){$\emptybox$ Övrig rapport}
-    \put(34,158){$\emptybox$}
-    \put(37,158){\line(1,0){20}}
-    \put(1,153){{\bfseries URL för elektronisk version}}
-    \put(68,186){{\bfseries ISBN}}
-    \put(68,181){\line(1,0){57}}
-    \put(68,178){{\bfseries ISRN}}
-    \put(68,171){\line(1,0){57}}
-    \put(68,168){{\bfseries Serietitel och serienummer}}
-    \put(68,165){Title of series, numbering}
-    \put(107,168){{\bfseries ISSN}}
-    \put(107,163){\line(1,0){18}}
-    \put(69,155){\@publicationseries}
-    \put(69,150){Thesis No. \@thesisnumber}
-    \put(1,138){{\bfseries Titel}}
-    \put(1,135){Title}
-    \put(1,122){{\bfseries Författare}}
-    \put(1,119){Author}
-    \put(1,104){{\bfseries Sammanfattning}}
-    \put(1,101){Abstract}
-    \put(1,8){{\bfseries Nyckelord}}
-    \put(1,5){Keywords}
-%%% Här fylls aktuella uppgifter i
-%%% -------------------------------
-    \fontsize{9}{10pt}\selectfont
-%%% Sammanfattning:
-    \put(7,96){\pbox[t]{110mm}{\setlength{\parindent}{3mm}
-        \@abstract}}
-    \put(27,201){\@divisionshort,}
-    \put(27,198){\@department}
-    \put(27,194){581 83 Linköping}
-%%% Datum:
-    \put(95,197){
-      \@dateofpublication
-      }
-%%% ISBN:
-    \put(70,183){\@isbn}
-%%% ISRN:
-    \put(70,173){\isrn}
-%%% ISSN:
-    \put(108,164){\@issn}
-%%% URL:
-
-    \put(1,148){\pbox{58mm}{\footnotesize{\texttt{http://urn.kb.se/resolve?
-            urn=urn:nbn:se:liu:diva-\@divanumber/}}}}
-%%% Datum:
-    \put(131,261){
-      \@dateofpublication
-      }
-%%% Svensk och engelsk titel:
-   %% \put(7,130){\pbox[t]{100mm}{\@titlebibpage}}
-      \put(7,130){\pbox[t]{100mm}{\swedishenglish{\@titleswedish}{\@titleenglish}}}
-%%% Författare:
-    \put(7,114){\@author}
-%%% Enbart för lic
-    \iflic{\put(34,178){\scriptsize $\times$}}\fi
-    \ifstudent{\put(34,174){\scriptsize $\times$}}\fi
-
-%%% Språk
-    \swedishenglish{\put(0.98,178.25){\scriptsize $\times$}}{\put(1,174){\scriptsize $\times$}}
-%%% Nyckelord:
-    \put(17,5){\pbox{100mm}{\@keywords}}
-  \end{picture}
-  \pagestyle{plain}
-}
-
-\iflic
-\AtEndDocument{\cleartorecto%
-  \librarypage\cleartorecto%
-}
-\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% liuthesis.cls ends here
