@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu Apr 13 13:39:57 2017 (+0200)
+%% Last-Updated: Thu Apr 13 13:54:24 2017 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1410
+%%     Update #: 1411
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -977,9 +977,9 @@ publication and for assurance of document integrity, please refer to its www hom
   \makededicationpage
   \fi
   \cleartorecto%
-  \phantomsection
-  \swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
-  {\addcontentsline{toc}{chapter}{Abstract}}
+\phantomsection
+\swedishenglish{\addcontentsline{toc}{chapter}{Sammanfattning}}
+{\addcontentsline{toc}{chapter}{Abstract}}
 \clearpage
 \ifstudent
 \begin{abstract}
