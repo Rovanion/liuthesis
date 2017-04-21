@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Fri Apr 21 21:25:12 2017 (+0200)
+%% Last-Updated: Fri Apr 21 22:15:22 2017 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1457
+%%     Update #: 1486
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -493,8 +493,7 @@
     \fi
     \interactionmode=\count255
     \else
-    \typeout{ **** Please use XeTeX and install Calibri and KorolevLiU
-      for correct typesetting ***}
+    \typeout{ **** Please use XeTeX and install Calibri for correct typesetting ***}
   \fi
 }
 
@@ -505,10 +504,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\exhibitpagelith}{%
-  \tryfonts{Calibri}Carlito-Regular}
+  \tryfonts{Calibri}{Arial}
     \copypagestyle{exhibitpagestyle}{plain}
-    \makeevenfoot{exhibitpagestyle}{\tryfonts{Times}{Times New Roman} ISBN \@isbn}{}{\tryfonts{Times}{Times New Roman} ISSN \@issn}
-    \makeoddfoot{exhibitpagestyle}{\tryfonts{Times}{Times New Roman} ISBN \@isbn}{}{\tryfonts{Times}{Times New Roman} ISSN \@issn}
+    \makeevenfoot{exhibitpagestyle}{ISBN \@isbn}{}{ISSN \@issn}
+    \makeoddfoot{exhibitpagestyle}{ISBN \@isbn}{}{ISSN \@issn}
     \thispagestyle{exhibitpagestyle}
   \begin{center}
    {\footnotesize \@publicationseries}\\
@@ -538,7 +537,7 @@
     \vspace*{1mm}
   \end{center}
   \clearpage{}
-  \tryfonts{Times}{Times New Roman}
+  \tryfonts{Calibri}{Arial Roman}
     \small \textbf{Abstract}\\
     \@abstract
     \vfill
@@ -554,7 +553,7 @@
 
 \newcommand{\exhibitpagefilfak}{%
   \begin{center}
-    \tryfonts{KorolevLiU}{Carlito-Regular}
+    \tryfonts{KorolevLiU}{Calibri}
       \@publicationseries{} No. \@thesisnumber\\[3\baselineskip]
       {\Large\@titleswedish\\
         \@subtitleswedish}\\[5mm]\fi
@@ -614,7 +613,7 @@
 \fi
 
 \newcommand\makeundergraduatetitle{%
-  {\tryfonts{Calibri}{Carlito-Regular}
+  {\tryfonts{Calibri}{Arial}
       {\raggedleft%
       \sffamily%
       \swedishenglish{%
@@ -648,17 +647,17 @@
       \swedishenglish{\ifsubtitleswedish}{\ifsubtitleenglish} -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleswedish}{\@subtitleenglish}\par}\fi%
       \hrulefill{}
       \\{}
-      {\tryfonts{Calibri Italic}{Carlito-Italic}{%
+      {\tryfonts{Calibri}{Arial}{%
           \fontsize{13pt}{15pt}\selectfont%
-          \swedishenglish{\@titleenglish}{\@titleswedish}\par}%
+          \textit{\swedishenglish{\@titleenglish}{\@titleswedish}}\par}%
         \swedishenglish{\ifsubtitleenglish}{\ifsubtitleswedish}--
-        {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}\par}
+        {\fontsize{13pt}{15pt}\textit{\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}}\par}
       \fi}%
       \vspace*{10mm}%
-      {\tryfonts{Calibri}{Carlito-Regular}\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
+      {\tryfonts{Calibri}{Arial}\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
       }%
       \vspace*{10mm}%
-      {\tryfonts{Calibri}{Carlito-Regular}\fontsize{10pt}{11pt}\selectfont
+      {\tryfonts{Calibri}{Arial}\fontsize{10pt}{11pt}\selectfont
         \parbox{\textwidth}{\swedishenglish{Handledare}{Supervisor}: \@supervisor\\
           \swedishenglish{Examinator}{Examiner}: \@examiner\\[2\baselineskip]
         \ifexternalsupervisor \swedishenglish{Extern
@@ -679,7 +678,7 @@
   }
 
 \newcommand{\makegraduatetitle}{
-  \tryfonts{KorolevLiU}{Calibri}
+  \tryfonts{Calibri}{Arial}
   {\center
     {\footnotesize\centerline\@publicationseries{}%\\
       \ifphd
@@ -688,10 +687,8 @@
       Licentiate Thesis
       \fi No.  \@thesisnumber}\\[25mm] 
      {\LARGE\bfseries\gettitle}\\[20mm]
-% \swedishenglish{av}{by}
      {\Large\bfseries\@author}\\
      \vfill
-% \\[6mm]{\today}\\[105mm]
     \swedishenglish{\gdef\@langlogo{sv}}{\gdef\@langlogo{en}}
     \includegraphics[width=35mm]{liu_primary_black_\@langlogo}
    \\[12mm]
@@ -784,7 +781,7 @@
 % Intro page for MSC theses
 \newcommand{\makeinsidepage}{
   \thispagestyle{empty}
-  {\tryfonts{Calibri}{Carlito-Regular}\selectfont
+  {\tryfonts{Calibri}{Arial}\selectfont
 
 \vspace*{2cm}
  \section*{Upphovsrätt}
