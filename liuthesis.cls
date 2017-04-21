@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Thu Apr 13 13:54:24 2017 (+0200)
+%% Last-Updated: Fri Apr 21 21:25:12 2017 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1411
+%%     Update #: 1457
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -46,7 +46,7 @@
 %% 
 %%% Code:
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{liuthesis} [2016/03/10 Thesis class for LiU]
+\ProvidesClass{liuthesis} [2017/04/20 Thesis class for LiU]
 \typeout{Undergraduate and graduate thesis class for LiU by Ola Leifler - v 1.1}
 \def\createvariable#1{%
   \expandafter\def\csname #1\endcsname{\expandafter\gdef\csname @#1\endcsname}
@@ -298,15 +298,6 @@
 \RequirePackage[T1]{fontenc}
 \fi
 
-% Define the \emptybox command depending on the available symbols
-% (from MnSymbol or mathabx, respectively)
-
-\ifxetex
-\newcommand{\emptybox}{\Box}
-\else
-\newcommand{\emptybox}{\boxvoid}
-\fi
-
 
 \ifphd
 \gdef\@degreetype{\@degreeprefix {} doktorsexamen}
@@ -354,12 +345,11 @@
 }
 \RequirePackage{csquotes}
 \ifxetex
+\RequirePackage{polyglossia}
 \swedishenglish{
-  \RequirePackage{polyglossia}
   \setmainlanguage{swedish}
   \setotherlanguages{english}
 }{
-  \RequirePackage{polyglossia}
   \setmainlanguage{english}
 }
 \else
@@ -415,10 +405,6 @@
   \cleartorecto%
   \thispagestyle{empty}
   \mbox{}%
-%  \addtolength{\TPVertModule}{4cm}
-%  \begin{textblock}{1}(1,1)
-%    \feline@chm[1cm]
-%  \end{textblock}
   \vspace*{\fill}
    \begin{center}%
      {\hfill \feline@chm[2.5cm]\\[2\baselineskip]}
@@ -431,12 +417,7 @@
   \includepdf[#1]{#2}%
 }
 \newenvironment{papers}{
-  % \makepagestyle{papersstyle}
   \makeevenhead{ruled}{\papermark}{}{}
-  % \makeevenfoot{papersstyle}{\thepage}{}{}
-  % \makeoddhead{papersstyle}{}{}{\rightmark}
-  % \makeoddfoot{papersstyle}{}{}{\thepage}
-  % \pagestyle{papersstyle}
   \renewcommand*{\thechapter}{\thearticle}
   \newlength{\numberheight} 
  \makechapterstyle{paperstyle}{%
@@ -448,51 +429,29 @@
     \renewcommand*{\chapnumfont}{\normalfont\HUGE} 
     \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\flushright} 
     \renewcommand*{\printchaptername}{%
-      %\chapnamefont\MakeUppercase{\@thepaper}
     } 
     \renewcommand*{\chapternamenum}{} 
     
     \renewcommand*{\printchapternum}{%
-      % \makebox[0.5\marginboxlength][l]{\hspace{.8em}% 
-      % \resizebox{!}{\numberheight}{\chapnumfont \thearticle}% 
-      % \hspace{.8em}% 
-      % \rule{\marginboxlength}{\numberheight}%
-      % }
     }% 
     \makeoddfoot{plain}{}{}{\thepage}}
     \renewcommand{\@chapapp}{\papermark}
     \chapterstyle{paperstyle}
-  % \setcounter{chapter}{0}
 }{}
 \newcommand{\includearticletex}[1]{%
-%  \@twosidetrue
  \stepcounter{article}%
   \cleartorecto%
   \thispagestyle{empty}
   \mbox{}%
-%  \addtolength{\TPVertModule}{4cm}
-%  \begin{textblock}{1}(1,1)
-%    \feline@chm[1cm]
-%  \end{textblock}
   \vspace*{\fill}
    \begin{center}%
      {\hfill \feline@chm[2.5cm]\\[2\baselineskip]}
      {\fullcite{#1}}
   \end{center}%
   \vspace*{\fill}%
-  %\renewcommand*{\papermark}{}
   \clearpage{}
-  %\renewcommand*{\papermark}{\@thepaper{} \thearticle}
-  %\addcontentsline{toc}{chapter}{\papermark}%
   \chapter[\papermark][\papermark]{\citetitle{#1}}
   \label{art:#1}
-  % \cleartorecto%
-  % \thispagestyle{empty}
-  % \vspace{3\baselineskip}
-  % {\centering\Huge\textbf{\textsf{\papermark\\ \citetitle{#1}}}}
-  % \vspace{3\baselineskip}
-  %\setcounter{section}{0}
-  %\renewcommand*{\thesection}{\arabic{section}}
  \input{papers/#1}%
 }
 
@@ -514,28 +473,28 @@
 
 \def\tryfonts#1#2{
   \ifxetex
-  \def\primaryfont{''#1''} % first preferred font
-  \def\fallbackfont{"#2"} % if first font not avaliable
-  \count255=\interactionmode
-  \batchmode
-  \font\bodyfont=\primaryfont\space at 10pt
-  \ifx\bodyfont\nullfont
-    \font\bodyfont = \fallbackfont\space at 10pt
+    \def\primaryfont{"#1"} % first preferred font
+    \def\secondaryfont{"#2"} % if first font not avaliable
+    \count255=\interactionmode
+    \batchmode
+    \font\bodyfont=\primaryfont\space at 10pt
     \ifx\bodyfont\nullfont
-      \errorstopmode
-      \errmessage{Neither #1 or #2 fonts installed, quitting..}
+      \font\bodyfont=\secondaryfont\space at 10pt
+      \ifx\bodyfont\nullfont
+        \errorstopmode
+        \errmessage{Neither #1 or #2 fonts installed, quitting..}
+      \else
+        \fontspec{#2}
+        \setmainfont{#2}
+      \fi
     \else
-    \fontspec{#2}
-    \setmainfont{#2}
+      \fontspec{#1}
+      \setmainfont{#1}
     \fi
+    \interactionmode=\count255
     \else
-    \fontspec{#1}
-    \setmainfont{#1}
-  \fi
-  \interactionmode=\count255
-  \else
-      \errmessage{Please use XeTeX for typesetting in order to use TTF
-      fonts}
+    \typeout{ **** Please use XeTeX and install Calibri and KorolevLiU
+      for correct typesetting ***}
   \fi
 }
 
@@ -546,7 +505,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\exhibitpagelith}{%
-  \tryfonts{Times}{Times New Roman}
+  \tryfonts{Calibri}Carlito-Regular}
     \copypagestyle{exhibitpagestyle}{plain}
     \makeevenfoot{exhibitpagestyle}{\tryfonts{Times}{Times New Roman} ISBN \@isbn}{}{\tryfonts{Times}{Times New Roman} ISSN \@issn}
     \makeoddfoot{exhibitpagestyle}{\tryfonts{Times}{Times New Roman} ISBN \@isbn}{}{\tryfonts{Times}{Times New Roman} ISSN \@issn}
@@ -595,7 +554,7 @@
 
 \newcommand{\exhibitpagefilfak}{%
   \begin{center}
-    \ifxetex\tryfonts{KorolevLiU}{Arial}\fi
+    \tryfonts{KorolevLiU}{Carlito-Regular}
       \@publicationseries{} No. \@thesisnumber\\[3\baselineskip]
       {\Large\@titleswedish\\
         \@subtitleswedish}\\[5mm]\fi
@@ -655,7 +614,7 @@
 \fi
 
 \newcommand\makeundergraduatetitle{%
-  {\tryfonts{Calibri}{Arial}
+  {\tryfonts{Calibri}{Carlito-Regular}
       {\raggedleft%
       \sffamily%
       \swedishenglish{%
@@ -689,15 +648,17 @@
       \swedishenglish{\ifsubtitleswedish}{\ifsubtitleenglish} -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleswedish}{\@subtitleenglish}\par}\fi%
       \hrulefill{}
       \\{}
-      {\ifxetex\fontspec{Calibri Italic}\fi{\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@titleenglish}{\@titleswedish}\par}%
+      {\tryfonts{Calibri Italic}{Carlito-Italic}{%
+          \fontsize{13pt}{15pt}\selectfont%
+          \swedishenglish{\@titleenglish}{\@titleswedish}\par}%
         \swedishenglish{\ifsubtitleenglish}{\ifsubtitleswedish}--
         {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}\par}
       \fi}%
       \vspace*{10mm}%
-      {\ifxetex\fontspec{Calibri}\fi\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
+      {\tryfonts{Calibri}{Carlito-Regular}\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
       }%
       \vspace*{10mm}%
-      {\ifxetex\fontspec{Calibri}\fi\fontsize{10pt}{11pt}\selectfont
+      {\tryfonts{Calibri}{Carlito-Regular}\fontsize{10pt}{11pt}\selectfont
         \parbox{\textwidth}{\swedishenglish{Handledare}{Supervisor}: \@supervisor\\
           \swedishenglish{Examinator}{Examiner}: \@examiner\\[2\baselineskip]
         \ifexternalsupervisor \swedishenglish{Extern
@@ -718,7 +679,7 @@
   }
 
 \newcommand{\makegraduatetitle}{
-  \ifxetex\tryfonts{KorolevLiU}{Arial}
+  \tryfonts{KorolevLiU}{Calibri}
   {\center
     {\footnotesize\centerline\@publicationseries{}%\\
       \ifphd
@@ -823,7 +784,7 @@
 % Intro page for MSC theses
 \newcommand{\makeinsidepage}{
   \thispagestyle{empty}
-  {\ifxetex\fontspec{Calibri}\fi\selectfont
+  {\tryfonts{Calibri}{Carlito-Regular}\selectfont
 
 \vspace*{2cm}
  \section*{Upphovsrätt}
