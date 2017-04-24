@@ -10,7 +10,7 @@ PDFNAME = $(shell basename -s.tex $(TEXMAINFILE))
 #Location of latexmk binary
 MKLATEX = latexmk
 #Options to latexmk, should need to be changed
-MKLATEXOPTS = -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
+MKLATEXOPTS = -pdf -pdflatex="xelatex -interaction=nonstopmode" -use-make
 
 demos: demo_student_thesis.tex demo_lith_lic.tex demo_lith_phd.tex demo_filfak_lic.tex demo_filfak_phd.tex demo_exhibitpage_filfak.tex demo_exhibitpage_lith.tex
 	$(MKLATEX) $(MKLATEXOPTS) $?
