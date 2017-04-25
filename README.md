@@ -41,7 +41,7 @@ for exhibit pages for the philosophical faculty.
 The `liuthesis` package includes a number of packages for convenient,
 contemporary TeX typesetting. While the standard `pdfTeX` engine can be used for
 building, `XeTeX` is recommended in order to get the corrects fonts
-(KorolevLiU/Calibri/Calibri Italic) used in the LiU style manual. When `XeTeX`
+(KorolevLiU/Calibri/Carlito) used in the LiU style manual. When `XeTeX`
 is used, the polyglossia, mathspec, fontspec, xunicode and, xltxtra packages are
 loaded. When `pdfTeX` is used, babel, palatino, and mathpazo packages are used
 instead.
