@@ -1,4 +1,9 @@
-#LiU Thesis class
+# LaTeX class for LiU Thesis
+
+This is a modern class for writing PhD/Lic/Master/Bachelor and other theses at
+Linköping University (LiU).
+
+## Authors
 
 Ola Leifler, ola.leifler@liu.se, 2011-2017
 
@@ -20,7 +25,8 @@ The following options are recognized by the liuthesis document class
 - `swedish` - use Swedish as the main language, English as the secondary language
 - `english` - use English as the main language
 
-... plus all the options recognized by the [memoir](https://www.ctan.org/pkg/memoir) package, which liuthesis extends.
+... plus all the options recognized by the
+[memoir](https://www.ctan.org/pkg/memoir) package, which liuthesis extends.
 
 ## Requirements
 
@@ -33,11 +39,11 @@ for exhibit pages for the philosophical faculty.
 ## Packages included
 
 The `liuthesis` package includes a number of packages for convenient,
-contemporary TeX typesetting. When using the XeTeX engine for
-typesetting your manuscript, the polyglossia, mathspec, fontspec,
-xunicode and xltxtra packages are loaded. All manuscript files should
-be written with UTF-8 encoding. When PDFLaTeX is used as the
-typsetting engine, the babel, palatino and mathpazo packages are used
+contemporary TeX typesetting. While the standard `pdfTeX` engine can be used for
+building, `XeTeX` is recommended in order to get the corrects fonts
+(KorolevLiU/Calibri/Calibri Italic) used in the LiU style manual. When `XeTeX`
+is used, the polyglossia, mathspec, fontspec, xunicode and, xltxtra packages are
+loaded. When `pdfTeX` is used, babel, palatino, and mathpazo packages are used
 instead.
 
 The [BibLaTeX](https://www.ctan.org/pkg/biblatex) package is used for
@@ -45,6 +51,17 @@ managing references. Currently, there is no way to specify the
 load-time options to biblatex as document class options together with
 other options, so the biblatex package _has to be loaded manually_ in
 settings.tex (see Usage below).
+
+## System Requirements
+`liuthesis` uses one of the following two build environments:
+* `XeLaTeX` (recommended)
+* `pdfLaTeX`
+
+`liuthesis` also uses many modern LaTeX packages, so a fairly modern
+distribution of LaTeX is required. 
+
+For correct font typesetting according to the LiU style manual, the proprietary
+fonts  KorolevLiU or Calibri/Calibri Italic are required.
 
 ## Usage
 
@@ -63,6 +80,9 @@ please add other logotypes as appropriate.
 In your thesis file, you need to specify where the bibliography
 should be typeset using the command `\printbibliography`.
 
+All files must be typeset using UTF-8 in order for non-latin characters such as
+åäö to work.
+
 There are a number of demo thesis files (`demo*.tex`) that provide
 examples of how the template works.
 
@@ -76,7 +96,7 @@ provide minimal examples that should get you started.
 
 ## Makefile
 
-If you are on a platform where you can use Make for building your PDF,
+If you are on a platform where you can use `make` for building your PDF,
 we have a Makefile ready for you. Edit the name of the main file that
 you wish to process (`TEXMAINFILE`) and run `make`. This will run
 xelatex and biber as many times as needed to produce a PDF. To clean
