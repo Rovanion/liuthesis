@@ -22,6 +22,14 @@ The following options are recognized by the liuthesis document class
 
 ... plus all the options recognized by the [memoir](https://www.ctan.org/pkg/memoir) package, which liuthesis extends.
 
+## Requirements
+
+For correct typesetting of the front matter, _XeTeX must be used_ as a
+typesettings engine on a platform where the proprietary fonts
+KorolevLiU or Calibri/Carlito are available. Carlito is used as a
+fallback option if Calibri is not installed. KorolevLiU is only used
+for exhibit pages for the philosophical faculty.
+
 ## Packages included
 
 The `liuthesis` package includes a number of packages for convenient,
@@ -31,10 +39,6 @@ xunicode and xltxtra packages are loaded. All manuscript files should
 be written with UTF-8 encoding. When PDFLaTeX is used as the
 typsetting engine, the babel, palatino and mathpazo packages are used
 instead.
-
-Note that _for correct typesetting of the front matter, XeTeX must be
-used_ as a typesettings engine on a platform where the proprietary
-fonts KorolevLiU or Calibri/Calibri Italic are available.
 
 The [BibLaTeX](https://www.ctan.org/pkg/biblatex) package is used for
 managing references. Currently, there is no way to specify the
