@@ -504,7 +504,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\exhibitpagelith}{%
-  \tryfonts{Calibri}{Arial}
+  \tryfonts{Calibri}{Carlito}
     \copypagestyle{exhibitpagestyle}{plain}
     \makeevenfoot{exhibitpagestyle}{ISBN \@isbn}{}{ISSN \@issn}
     \makeoddfoot{exhibitpagestyle}{ISBN \@isbn}{}{ISSN \@issn}
@@ -537,7 +537,7 @@
     \vspace*{1mm}
   \end{center}
   \clearpage{}
-  \tryfonts{Calibri}{Arial Roman}
+  \tryfonts{Calibri}{Carlito}
     \small \textbf{Abstract}\\
     \@abstract
     \vfill
@@ -613,7 +613,7 @@
 \fi
 
 \newcommand\makeundergraduatetitle{%
-  {\tryfonts{Calibri}{Arial}
+  {\tryfonts{Calibri}{Carlito}
       {\raggedleft%
       \sffamily%
       \swedishenglish{%
@@ -647,17 +647,17 @@
       \swedishenglish{\ifsubtitleswedish}{\ifsubtitleenglish} -- {\fontsize{13pt}{15pt}\selectfont\swedishenglish{\@subtitleswedish}{\@subtitleenglish}\par}\fi%
       \hrulefill{}
       \\{}
-      {\tryfonts{Calibri}{Arial}{%
+      {\tryfonts{Calibri}{Carlito}{%
           \fontsize{13pt}{15pt}\selectfont%
           \textit{\swedishenglish{\@titleenglish}{\@titleswedish}}\par}%
         \swedishenglish{\ifsubtitleenglish}{\ifsubtitleswedish}--
         {\fontsize{13pt}{15pt}\textit{\selectfont\swedishenglish{\@subtitleenglish}{\@subtitleswedish}}\par}
       \fi}%
       \vspace*{10mm}%
-      {\tryfonts{Calibri}{Arial}\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
+      {\tryfonts{Calibri}{Carlito}\fontsize{12pt}{13pt}\selectfont\textbf{\@author}\par
       }%
       \vspace*{10mm}%
-      {\tryfonts{Calibri}{Arial}\fontsize{10pt}{11pt}\selectfont
+      {\tryfonts{Calibri}{Carlito}\fontsize{10pt}{11pt}\selectfont
         \parbox{\textwidth}{\swedishenglish{Handledare}{Supervisor}: \@supervisor\\
           \swedishenglish{Examinator}{Examiner}: \@examiner\\[2\baselineskip]
         \ifexternalsupervisor \swedishenglish{Extern
@@ -678,7 +678,7 @@
   }
 
 \newcommand{\makegraduatetitle}{
-  \tryfonts{Calibri}{Arial}
+  \tryfonts{Calibri}{Carlito}
   {\center
     {\footnotesize\centerline\@publicationseries{}%\\
       \ifphd
@@ -781,7 +781,7 @@
 % Intro page for MSC theses
 \newcommand{\makeinsidepage}{
   \thispagestyle{empty}
-  {\tryfonts{Calibri}{Arial}\selectfont
+  {\tryfonts{Calibri}{Carlito}\selectfont
 
 \vspace*{2cm}
  \section*{Upphovsrätt}
