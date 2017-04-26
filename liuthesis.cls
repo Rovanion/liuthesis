@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Tue Apr 25 11:44:17 2017 (+0200)
+%% Last-Updated: Wed Apr 26 11:57:50 2017 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1487
+%%     Update #: 1490
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -510,7 +510,7 @@
     \makeoddfoot{exhibitpagestyle}{ISBN \@isbn}{}{ISSN \@issn}
     \thispagestyle{exhibitpagestyle}
   \begin{center}
-   {\footnotesize \@publicationseries}\\
+    {\footnotesize \@publicationseries}\\
     {\footnotesize \ifphd Dissertations,\else Licentiate Thesis\fi {} No. \@thesisnumber}\\[15mm]
     {\Large\bfseries\swedishenglish{\@titleswedish}{\@titleenglish}}\\[5mm]
     by\\[5mm]
@@ -537,7 +537,7 @@
     \vspace*{1mm}
   \end{center}
   \clearpage{}
-  \tryfonts{Calibri}{Carlito Roman}
+  \tryfonts{Calibri}{Carlito}
     \small \textbf{Abstract}\\
     \@abstract
     \vfill

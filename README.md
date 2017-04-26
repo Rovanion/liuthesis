@@ -56,12 +56,16 @@ settings.tex (see Usage below).
 `liuthesis` uses one of the following two build environments:
 * `XeLaTeX` (recommended)
 * `pdfLaTeX`
+* `biber` for setting and compiling the reference list.
 
 `liuthesis` also uses many modern LaTeX packages, so a fairly modern
 distribution of LaTeX is required. 
 
 For correct font typesetting according to the LiU style manual, the proprietary
-fonts  KorolevLiU or Calibri/Calibri Italic are required.
+fonts  KorolevLiU or Calibri are required. Carlito may be used as a
+fallback for Calibri on systems that do not have Calibri
+installed. KorolevLiU is only used for exhibit pages (spikblad) on the
+philosophical faculty.
 
 ## Usage
 
