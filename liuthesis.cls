@@ -952,9 +952,9 @@ publication and for assurance of document integrity, please refer to its www hom
   \swedishenglish{\addcontentsline{toc}{chapter}{Författarens tack}}
   {\addcontentsline{toc}{chapter}{Acknowledgments}}
   \clearpage
-  \tableofcontents  
-  \iftotalfigures \clearpage{}\listoffigures\fi 
-  \iftotaltables \clearpage{}\listoftables\fi
+  {\pagestyle{plain}\tableofcontents\relax\clearpage}
+  \iftotalfigures {\pagestyle{plain}\listoffigures\relax\clearpage}\fi 
+  \iftotaltables {\pagestyle{plain}\listoftables\relax\clearpage}\fi 
   \ifprinterfriendly
     \cleartooddpage
   \else
