@@ -351,12 +351,13 @@
   \setotherlanguages{english}
 }{
   \setmainlanguage{english}
+  \setotherlanguages{swedish}
 }
 \else
 \swedishenglish{
   \RequirePackage[swedish,english]{babel}
 }{
-  \RequirePackage[english]{babel}
+  \RequirePackage[english,swedish]{babel}
 }
 \fi
 %% Include articles
@@ -722,11 +723,25 @@
 \newcommand{\abstractpages}{%
 \ifphd
   \vspace*{6mm}
-  { \setlength{\parindent}{0mm}
+  \ifxetex
+  \begin{swedish}
+  \else
+      \selectlanguage{swedish}
+  \fi
+  \setlength{\parindent}{0mm}
     \setlength\parskip{8pt}\centerline{POPULÄRVETENSKAPLIG SAMMANFATTNING}
     \vspace{3mm}
     \footnotesize{\@sammanfattning}    
-  }
+  \ifxetex
+    \end{swedish}
+  \else
+    \swedishenglish
+    {
+    }
+    {
+    \selectlanguage{english}
+    }
+  \fi
 \fi
   \newpage
   \vspace*{6mm}
