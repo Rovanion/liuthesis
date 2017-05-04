@@ -357,7 +357,7 @@
 \swedishenglish{
   \RequirePackage[swedish,english]{babel}
 }{
-    \RequirePackage[english,swedish]{babel}
+  \RequirePackage[english,swedish]{babel}
 }
 \fi
 %% Include articles
@@ -733,9 +733,14 @@
     \vspace{3mm}
     \footnotesize{\@sammanfattning}    
   \ifxetex
-  \end{swedish}
+    \end{swedish}
   \else
-      \selectlanguage{english}
+    \swedishenglish
+    {
+    }
+    {
+    \selectlanguage{english}
+    }
   \fi
 \fi
   \newpage
