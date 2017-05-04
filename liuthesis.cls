@@ -286,6 +286,17 @@
 % Set up input encoding and font handling
 \ifxetex
 \RequirePackage[MnSymbol]{mathspec}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some versions of latex have issues with mathspec, see
+% https://tex.stackexchange.com/questions/85696/what-causes-this-strange-interaction-between-glossaries-and-amsmath
+\makeatletter
+\let\RequirePackage\original@RequirePackage
+\let\usepackage\RequirePackage
+\makeatother
+% End workaround
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \RequirePackage{xltxtra}
 \defaultfontfeatures{Mapping=tex-text}
 \else
