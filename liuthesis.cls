@@ -351,6 +351,7 @@
   \setotherlanguages{english}
 }{
   \setmainlanguage{english}
+  \setotherlanguages{swedish}
 }
 \else
 \swedishenglish{
@@ -722,11 +723,12 @@
 \newcommand{\abstractpages}{%
 \ifphd
   \vspace*{6mm}
-  { \setlength{\parindent}{0mm}
+  \begin{swedish}
+  \setlength{\parindent}{0mm}
     \setlength\parskip{8pt}\centerline{POPULÄRVETENSKAPLIG SAMMANFATTNING}
     \vspace{3mm}
     \footnotesize{\@sammanfattning}    
-  }
+\end{swedish}
 \fi
   \newpage
   \vspace*{6mm}
