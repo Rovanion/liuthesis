@@ -953,8 +953,8 @@ publication and for assurance of document integrity, please refer to its www hom
   {\addcontentsline{toc}{chapter}{Acknowledgments}}
   \clearpage
   {\pagestyle{plain}\tableofcontents\relax\clearpage}
-  \iftotalfigures \clearpage{}\listoffigures\fi 
-  \iftotaltables \clearpage{}\listoftables\fi
+  \iftotalfigures {\pagestyle{plain}\listoffigures\relax\clearpage}\fi 
+  \iftotaltables {\pagestyle{plain}\listoftables\relax\clearpage}\fi 
   \ifprinterfriendly
     \cleartooddpage
   \else
