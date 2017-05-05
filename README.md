@@ -161,3 +161,82 @@ with the header2 package. Put this information in an Emacs init file:
 (add-hook 'write-file-hooks 'auto-update-file-header)
 (add-hook 'latex-mode-hook   'auto-make-header)
 ```
+
+## Complete list of parameters
+
+This is a complete list of parameters that can be modified as part of
+the template. Some of them are set by specifying a document class
+option, but all are available in the main manuscript and can be
+overwritten if necessary. Here is a description of them.
+
+All parameters are accessible through eponymous commands that render
+the name of the command, so that it will be obvious (hopefully) which
+commands to use for parameterizing the thesis.
+
+Thus, `\createvariable{edition}` creates a command `\edition{}` which
+accepts a single parameter and sets the global variable `\@edition`,
+which is given the initial value `\texttt{\textbackslash edition}`.
+
+
+```
+%% The edition of the PhD thesis (at the philosophical faculty)
+\createvariable{edition}
+
+%% Parameters for the exhibit page (spikblad)
+\createvariable{presentationroom}
+\createvariable{presentationbuilding}
+\createvariable{presentationcampus}
+\createvariable{presentationdate}
+\createvariable{presentationdateenglish}
+\createvariable{presentationtime}
+
+\createvariable{thesislanguage}
+\createvariable{faculty}
+\createvariable{issn}
+
+\createvariable{degreeprefix}
+\createvariable{degreesuffix}
+\createvariable{exhibittext}
+\createvariable{exhibittextswedish}
+\createvariable{opponenttitle}
+\createvariable{opponentname}
+\createvariable{opponentuniversity}
+\createvariable{opponentcountry}
+\createvariable{thesisnumber}
+\createvariable{currentyearthesisnumber}
+\createvariable{supportedby}
+\createvariable{publicationyear}
+\createvariable{publicationmonth}
+\createvariable{isbn}
+\createvariable{supervisor}
+\createvariable{examiner}
+\createvariable{titleenglish}
+\createvariable{titleswedish}
+\createvariable{keywords}
+\createvariable{keywordsswedish}
+\createvariable{department}
+\createvariable{departmentenglish}
+\createvariable{departmentshort}
+\createvariable{division}
+\createvariable{divisionshort}
+\createvariable{dateofpublication}
+\createvariable{publicationseries}
+
+%% Undergrad specific
+
+% faculty abbreviation, for the publication number
+\createvariable{area}
+
+% First-cycle/Second-cycle
+\createvariable{level}
+\createvariable{thesistypenameswedish}
+\createvariable{thesistypenameenglish}
+
+% 15/16/30 credit thesis
+\createvariable{thesiscredits}
+
+\createvariable{thesissubject}
+\createvariable{thesissubjectenglish}
+```
+
+
