@@ -1,11 +1,17 @@
 # LaTeX class for LiU Thesis
 
-This is a modern class for writing PhD/Lic/Master/Bachelor and other theses at
-Linköping University (LiU).
+This is `liuthesis`, a modern class for writing a thesis for PhD, Licenciate,
+Master, or Bachelor (plus some more) Linköping University (LiU). 
 
 ## Authors
 
 Ola Leifler, ola.leifler@liu.se, 2011-2017
+
+## Where to download
+
+The latest version can always be found on GitLab. `liuthesis` is constantly
+being developed, so go to https://gitlab.ida.liu.se/olale55/liuthesis to get the
+latest version.
 
 ## Package options
 
@@ -25,47 +31,54 @@ The following options are recognized by the liuthesis document class
 - `swedish` - use Swedish as the main language, English as the secondary language
 - `english` - use English as the main language
 
-... plus all the options recognized by the
-[memoir](https://www.ctan.org/pkg/memoir) package, which liuthesis extends.
+Since `liuthesis` is based on the [memoir](https://www.ctan.org/pkg/memoir)
+document class, all options supported by `memoir` are supported by `liuthesis`as
+well.
 
-## Requirements
+## System Requirements
 
-For correct typesetting of the front matter, _XeTeX must be used_ as a
-typesettings engine on a platform where the proprietary fonts
-KorolevLiU or Calibri/Carlito are available. Carlito is used as a
-fallback option if Calibri is not installed. KorolevLiU is only used
-for exhibit pages for the philosophical faculty.
+You need a modern LaTeX distribution to be able to use `liuthesis`. Depending on
+your operating system, we recommend you install the following distribution:
+* For Linux systems: `TeXLive`, we recommend at least version 2016.
+* For Windows systems: `MiKTeX`, we recommend at least version 2.9.
+* For Mac/OSX systems: `MacTeX`.
+
+More information on which distribution to choose can be found [at the LaTeX
+project homepage](https://www.latex-project.org/get/).
+
+`liuthesis` takes full advantage of the features of modern LaTeX, so you need
+to make sure your distribution installs at least the following packages (list
+incomplete):
+* `biblatex`
+* `biber`
+
+When LaTeX has been installed, you are ready to use `liuthesis`. When compiling,
+`liuthesis` you have the option of choosing between the following build
+environments: 
+* `XeLaTeX` (recommended)
+* `pdfLaTeX`
+
+For correct font typesetting according to the LiU style manual, the proprietary
+fonts  `KorolevLiU` or `Calibri` are required. `Carlito` may be used as a
+fallback for `Calibri` on systems that do not have `Calibri`
+installed. `KorolevLiU` is only used for exhibit pages ("spikblad") on the
+philosophical faculty.
 
 ## Packages included
 
 The `liuthesis` package includes a number of packages for convenient,
 contemporary TeX typesetting. While the standard `pdfTeX` engine can be used for
 building, `XeTeX` is recommended in order to get the corrects fonts
-(KorolevLiU/Calibri/Carlito) used in the LiU style manual. When `XeTeX`
-is used, the polyglossia, mathspec, fontspec, xunicode and, xltxtra packages are
-loaded. When `pdfTeX` is used, babel, palatino, and mathpazo packages are used
-instead.
+(`KorolevLiU`/`Calibri`/`Carlito`) used in the LiU style manual. When `XeTeX` is
+used, the `polyglossia`, `mathspec`, `fontspec`, `xunicode` and, `xltxtra`
+packages are loaded. When `pdfTeX` is used, `babel`, `palatino`, and `mathpazo`
+packages are used instead.
 
 The [BibLaTeX](https://www.ctan.org/pkg/biblatex) package is used for
 managing references. Currently, there is no way to specify the
 load-time options to biblatex as document class options together with
 other options, so the biblatex package _has to be loaded manually_ in
 settings.tex (see Usage below).
-
-## System Requirements
-`liuthesis` uses one of the following two build environments:
-* `XeLaTeX` (recommended)
-* `pdfLaTeX`
-* `biber` for setting and compiling the reference list.
-
-`liuthesis` also uses many modern LaTeX packages, so a fairly modern
-distribution of LaTeX is required. 
-
-For correct font typesetting according to the LiU style manual, the proprietary
-fonts  KorolevLiU or Calibri are required. Carlito may be used as a
-fallback for Calibri on systems that do not have Calibri
-installed. KorolevLiU is only used for exhibit pages (spikblad) on the
-philosophical faculty.
 
 ## Usage
 
@@ -77,7 +90,7 @@ This package contains a style file for theses (`liuthesis.cls`) and a file
 \addbibresource{<my bibliography file>}
 ```
 
-and possibly other settings. In the directory figures/, you should
+and possibly other settings. In the directory `figures/`, you should
 place all graphics for your thesis. Logos are included for LiU,
 please add other logotypes as appropriate.
 
@@ -85,27 +98,34 @@ In your thesis file, you need to specify where the bibliography
 should be typeset using the command `\printbibliography`.
 
 All files must be typeset using UTF-8 in order for non-latin characters such as
-åäö to work.
+åäö to work. Any modern editor will support this, and is probably enabled by
+default.
 
-There are a number of demo thesis files (`demo*.tex`) that provide
-examples of how the template works.
+## Example files
 
-`Abstract.tex` is a mandatory file with your abstract,
-`sammanfattning.tex` is included for dissertations that must include
-popular science descriptions. Other files can
-be included at will from your main thesis file.
+To make it easy to get started, a number of demonstration files are included: 
 
-For further usage instructions, please refer to `demo*.tex` that
-provide minimal examples that should get you started.
+* `demo_student_thesis.tex` for Bachelor and Master student theses
+* `demo_lith_lic.tex` for Licenciate theses at LiTH
+* `demo_filfak_lic.tex` for Licenciate theses at Filfak
+* `demo_lith_phd.tex` for PhD theses at LiTH
+* `demo_filfak_phd.tex` for PhD theses at Filfak
+* `demo_exhibipage_lith.tex` for exhibit pages (spikblad) at LiTH
+* `demo_exhibipage_filfak.tex` for exhibit pages (spikblad) at Filfak
+
+These demo pages are a good starting point and can be customized to your needs.
+Put your abstract in the file `Abstract.tex` (mandatory), and if your thesis
+requires a Swedish summary, put it in `sammanfattning.tex`. The demo files have
+further documentation to get you started.
 
 ## Makefile
 
 If you are on a platform where you can use `make` for building your PDF,
 we have a Makefile ready for you. Edit the name of the main file that
 you wish to process (`TEXMAINFILE`) and run `make`. This will run
-xelatex and biber as many times as needed to produce a PDF. To clean
+XeLaTeX and biber as many times as needed to produce a PDF. To clean
 all auxiliary files, run `make clean`. To typeset the demos, run `make
-demos`, which will update the pdf files in the `demo` directory.
+demos`, which will compile the demo files.
 
 ## Including articles
 
@@ -113,12 +133,11 @@ demos`, which will update the pdf files in the `demo` directory.
 \includearticle{<citekey>}
 ```
 
-With the `\includearticle` command, you can include pdf articles and
-refer to them in your thesis. demothesis.tex provides an example of
-this. `<citekey>` should be the same as the key in your bibliography
-which describes your article, and the file name of the pdf file. You
-can refer to your articles in your thesis using the reference key
-`art:<citekey>`.
+With the `\includearticle` command, you can include pdf articles and refer to
+them in your thesis. An example of this is given in the demo files (see above).
+`<citekey>` should be the same as the key in your bibliography which describes
+your article, and the file name of the pdf file. You can refer to your articles
+in your thesis using the reference key `art:<citekey>`.
 
 ```
 \includearticletex{<citekey>}
@@ -127,7 +146,7 @@ can refer to your articles in your thesis using the reference key
 With the `\includearticletex` command, you can include TeX articles
 and refer to them in your thesis. The files `demo*{lic,phd}.tex` provide examples
 of this. `<citekey>` should be the same as the key in your bibliography
-which describes your article, and the file name of the TeX manuscipt
+which describes your article, and the file name of the TeX manuscript
 in the papers/ directory. Please refer to the scigen.tex example for
 hints how you format your manuscript for inclusion. You can refer to
 your articles in your thesis using the reference key `art:<citekey>`.
@@ -143,7 +162,7 @@ where the argument supplied to that command will substitute
 ## File headers
 
 To use and update the file headers appropriately, you will need Emacs
-with the header2 package. Put this information in an Emacs init file:
+with the `header2` package. Put this information in an Emacs init file:
 
 ```
 (require 'package)
@@ -171,7 +190,7 @@ overwritten if necessary. Here is a description of them.
 
 All parameters are accessible through eponymous commands that render
 the name of the command, so that it will be obvious (hopefully) which
-commands to use for parameterizing the thesis.
+commands to use for parametrizing the thesis.
 
 Thus, `\createvariable{edition}` creates a command `\edition{}` which
 accepts a single parameter and sets the global variable `\@edition`,
