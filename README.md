@@ -10,8 +10,8 @@ Ola Leifler, ola.leifler@liu.se, 2011-2017
 ## Where to download
 
 The latest version can always be found on GitLab. `liuthesis` is constantly
-being developed, so go to https://gitlab.ida.liu.se/olale55/liuthesis to get the
-latest version.
+being developed, so go to [the download
+page](https://gitlab.ida.liu.se/olale55/liuthesis) to get the latest version.
 
 ## Package options
 
@@ -39,8 +39,8 @@ well.
 
 You need a modern LaTeX distribution to be able to use `liuthesis`. Depending on
 your operating system, we recommend you install the following distribution:
-* For Linux systems: `TeXLive`, we recommend at least version 2016.
-* For Windows systems: `MiKTeX`, we recommend at least version 2.9.
+* For Linux systems: `TeXLive` (we recommend at least version 2016).
+* For Windows systems: `MiKTeX` (we recommend at least version 2.9).
 * For Mac/OSX systems: `MacTeX`.
 
 More information on which distribution to choose can be found [at the LaTeX
@@ -58,6 +58,13 @@ environments:
 * `XeLaTeX` (recommended)
 * `pdfLaTeX`
 
+While the standard `pdfLaTeX` engine can be used for building, `XeTeX` is
+recommended in order to get the corrects fonts
+(`KorolevLiU`/`Calibri`/`Carlito`) used in the LiU style manual. When `XeTeX` is
+used, the `polyglossia`, `mathspec`, `fontspec`, `xunicode` and, `xltxtra`
+packages are loaded. When `pdfLaTeX` is used, `babel`, `palatino`, and
+`mathpazo` packages are used instead.
+
 For correct font typesetting according to the LiU style manual, the proprietary
 fonts  `KorolevLiU` or `Calibri` are required. `Carlito` may be used as a
 fallback for `Calibri` on systems that do not have `Calibri`
@@ -67,12 +74,7 @@ philosophical faculty.
 ## Packages included
 
 The `liuthesis` package includes a number of packages for convenient,
-contemporary TeX typesetting. While the standard `pdfTeX` engine can be used for
-building, `XeTeX` is recommended in order to get the corrects fonts
-(`KorolevLiU`/`Calibri`/`Carlito`) used in the LiU style manual. When `XeTeX` is
-used, the `polyglossia`, `mathspec`, `fontspec`, `xunicode` and, `xltxtra`
-packages are loaded. When `pdfTeX` is used, `babel`, `palatino`, and `mathpazo`
-packages are used instead.
+contemporary TeX typesetting.
 
 The [BibLaTeX](https://www.ctan.org/pkg/biblatex) package is used for
 managing references. Currently, there is no way to specify the
@@ -90,12 +92,12 @@ This package contains a style file for theses (`liuthesis.cls`) and a file
 \addbibresource{<my bibliography file>}
 ```
 
-and possibly other settings. In the directory `figures/`, you should
-place all graphics for your thesis. Logos are included for LiU,
-please add other logotypes as appropriate.
+and possibly other settings. In the directory `figures/`, you should place all
+graphics for your thesis. Logos are included for LiU, please add other logotypes
+as appropriate.
 
-In your thesis file, you need to specify where the bibliography
-should be typeset using the command `\printbibliography`.
+In your thesis file, you need to specify where the bibliography should be
+typeset using the command `\printbibliography`.
 
 All files must be typeset using UTF-8 in order for non-latin characters such as
 åäö to work. Any modern editor will support this, and is probably enabled by
@@ -120,12 +122,12 @@ further documentation to get you started.
 
 ## Makefile
 
-If you are on a platform where you can use `make` for building your PDF,
-we have a Makefile ready for you. Edit the name of the main file that
-you wish to process (`TEXMAINFILE`) and run `make`. This will run
-XeLaTeX and biber as many times as needed to produce a PDF. To clean
-all auxiliary files, run `make clean`. To typeset the demos, run `make
-demos`, which will compile the demo files.
+If you are on a platform where you can use `make` for building your PDF, we have
+prepared a `Makefile`. Edit the name of the main file that you wish to process
+(`TEXMAINFILE`) and run `make`. This will run `XeLaTeX` and `biber` as many
+times as needed to produce a PDF. To clean all auxiliary files, run `make
+clean`. To typeset the demos, run `make demos`, which will compile the demo
+files.
 
 ## Including articles
 
@@ -133,29 +135,29 @@ demos`, which will compile the demo files.
 \includearticle{<citekey>}
 ```
 
-With the `\includearticle` command, you can include pdf articles and refer to
+With the `\includearticle` command, you can include PDF articles and refer to
 them in your thesis. An example of this is given in the demo files (see above).
 `<citekey>` should be the same as the key in your bibliography which describes
-your article, and the file name of the pdf file. You can refer to your articles
+your article, and the file name of the PDF file. You can refer to your articles
 in your thesis using the reference key `art:<citekey>`.
 
 ```
 \includearticletex{<citekey>}
 ```
 
-With the `\includearticletex` command, you can include TeX articles
-and refer to them in your thesis. The files `demo*{lic,phd}.tex` provide examples
-of this. `<citekey>` should be the same as the key in your bibliography
-which describes your article, and the file name of the TeX manuscript
-in the papers/ directory. Please refer to the scigen.tex example for
-hints how you format your manuscript for inclusion. You can refer to
-your articles in your thesis using the reference key `art:<citekey>`.
+With the `\includearticletex` command, you can include TeX articles and refer to
+them in your thesis. The demonstration files for PhD and Licenciate (see above)
+include examples for this. `<citekey>` should be the same as the key in your
+bibliography which describes your article, and the file name of the TeX
+manuscript in the papers/ directory. Please refer to the `scigen.tex` example
+for hints how you format your manuscript for inclusion. You can refer to your
+articles in your thesis using the reference key `art:<citekey>`.
 
 There are a number of commands with one parameter which should be used
 to specify thesis metadata, and they are all typeset using the command
 names as they appear in the PDF. For instance, using the command
 `\opponent{Your opponent}`, you can specify the opponent. If you do not,
-the pdf will contain the verbatim text `\opponent` on all locations
+the PDF will contain the verbatim text `\opponent` on all locations
 where the argument supplied to that command will substitute
 `\opponent`.
 
@@ -183,18 +185,18 @@ with the `header2` package. Put this information in an Emacs init file:
 
 ## Complete list of parameters
 
-This is a complete list of parameters that can be modified as part of
-the template. Some of them are set by specifying a document class
-option, but all are available in the main manuscript and can be
-overwritten if necessary. Here is a description of them.
+This is a complete list of parameters that can be modified as part of the
+template. Some of them are set by specifying a document class option, but all
+are available in the main manuscript and can be overwritten if necessary. Here
+is a description of them.
 
-All parameters are accessible through eponymous commands that render
-the name of the command, so that it will be obvious (hopefully) which
-commands to use for parametrizing the thesis.
+All parameters are accessible through eponymous commands that render the name of
+the command, so that it will be obvious (hopefully) which commands to use for
+parametrizing the thesis.
 
-Thus, `\createvariable{edition}` creates a command `\edition{}` which
-accepts a single parameter and sets the global variable `\@edition`,
-which is given the initial value `\texttt{\textbackslash edition}`.
+Thus, `\createvariable{edition}` creates a command `\edition{}` which accepts a
+single parameter and sets the global variable `\@edition`, which is given the
+initial value `\texttt{\textbackslash edition}`.
 
 
 ```
