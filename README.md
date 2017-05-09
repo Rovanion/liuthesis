@@ -1,7 +1,7 @@
 # LaTeX class for LiU Thesis
 
 This is `liuthesis`, a modern class for writing a thesis for PhD, Licenciate,
-Master, or Bachelor (plus some more) Linköping University (LiU). 
+Master, or Bachelor (plus some more) at Linköping University (LiU) in Sweden. 
 
 ## Authors
 
