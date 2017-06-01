@@ -6,9 +6,9 @@
 %% Maintainer: 
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
 %% Version: 
-%% Last-Updated: Wed Apr 26 11:57:50 2017 (+0200)
+%% Last-Updated: Thu Jun  1 14:46:54 2017 (+0200)
 %%           By: Ola Leifler
-%%     Update #: 1490
+%%     Update #: 1493
 %% URL: 
 %% Keywords: 
 %% Compatibility: 
@@ -282,6 +282,8 @@
 \RequirePackage{ifthen}
 \RequirePackage{geometry}
 \RequirePackage[pdfusetitle]{hyperref}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
 
 % Set up input encoding and font handling
 \ifxetex
@@ -300,8 +302,6 @@
 \else
 \RequirePackage{graphicx}
 \RequirePackage{palatino}
-\RequirePackage{amssymb}
-\RequirePackage{amsmath}
 \RequirePackage{mathabx}
 \RequirePackage{mathpazo}
 \RequirePackage[T1]{fontenc}
