@@ -45,6 +45,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %%% Code:
+
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{liuthesis} [2017/04/20 Thesis class for LiU]
 \typeout{Undergraduate and graduate thesis class for LiU by Ola Leifler - v 1.1}
@@ -119,6 +121,13 @@
 \createvariable{thesiscredits}
 \createvariable{thesissubject}
 \createvariable{thesissubjectenglish}
+
+\department{Institutionen för datavetenskap}
+\departmentenglish{Department of Computer and Information Science}
+\departmentshort{IDA}
+\titleenglish{Evaluating Clojure Spec}
+\titleswedish{En utvärdering av Clojure Spec}
+\publicationyear{2017}
 
 \newif\ifsubtitleswedish
 \subtitleswedishfalse
