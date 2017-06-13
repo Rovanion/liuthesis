@@ -122,12 +122,17 @@
 \createvariable{thesissubject}
 \createvariable{thesissubjectenglish}
 
+
+%%%% Egna grunkor
+
 \department{Institutionen för datavetenskap}
 \departmentenglish{Department of Computer and Information Science}
 \departmentshort{IDA}
 \titleenglish{Evaluating Clojure Spec}
 \titleswedish{En utvärdering av Clojure Spec}
 \publicationyear{2017}
+\division{Software and Services - Programming Environments Lab}
+\edition{one}
 
 \newif\ifsubtitleswedish
 \subtitleswedishfalse
