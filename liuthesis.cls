@@ -66,7 +66,7 @@
 
 \ifxetex
 \else
-\RequirePackage[utf8x]{inputenc}
+\RequirePackage[utf8]{inputenc}
 \fi
 
 \RequirePackage[absolute]{textpos}
@@ -488,7 +488,7 @@
 \DeclareGraphicsExtensions{.pdf,.jpg,.png}
 \fi
 
-\graphicspath{{liuthesis/figures/}}
+\graphicspath{{figures/}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
