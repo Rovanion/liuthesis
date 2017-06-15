@@ -1,0 +1,47 @@
+\documentclass[msc,lith,english]{liuthesis}
+%% Settings go in settings.tex
+\include{settings}
+\usepackage{rotating}
+\usepackage{color}
+
+% \usepackage{changebar}
+
+\department{Institutionen för datavetenskap}
+\departmentenglish{Department of Computer and Information Science}
+\departmentshort{IDA}
+% If this is a thesis at the cognitive science study programme, use
+% the "area" command to generate a proper (?) ISRN
+% \area{KOGVET-A}
+
+% Include an external supervisor on the cover page
+\externalsupervisor{Rasmus Svensson}
+\supervisor{Bernhard Thiele}
+\examiner{Christoph Kessler}
+\titleenglish{Evaluating Clojure Spec}
+\titleswedish{Utvärdering av Clojure Spec}
+\thesissubject{Computer Science}
+
+\publicationyear{2017}
+\currentyearthesisnumber{001}
+\dateofpublication{\today}
+
+\author{Christian Luckey}
+
+% Two authors
+% \author{\parbox{\textwidth}{Ola Leifler\\
+%   Alexander Sanner}}
+
+\begin{document}
+
+\chapterstyle{VZ43}
+
+\include{out/main}
+
+\printbibliography
+
+\include{out/generation-benchmark}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% demothesis.tex ends here
