@@ -66,7 +66,7 @@
 
 \ifxetex
 \else
-\RequirePackage[utf8x]{inputenc}
+\RequirePackage[utf8]{inputenc}
 \fi
 
 \RequirePackage[absolute]{textpos}
@@ -133,8 +133,6 @@
 \publicationyear{2017}
 \division{Software and Services - Programming Environments Lab}
 \edition{one}
-
-
 
 
 \newif\ifsubtitleswedish
