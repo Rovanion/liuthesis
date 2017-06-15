@@ -1,49 +1,49 @@
-%%% liuthesis.cls --- 
-%% 
+%%% liuthesis.cls ---
+%%
 %% Filename: liuthesis.cls
-%% Description: 
+%% Description:
 %% Author: Ola Leifler
-%% Maintainer: 
+%% Maintainer:
 %% Created: Fri Mar 20 08:25:23 2009 (CET)
-%% Version: 
+%% Version:
 %% Last-Updated: Thu Jun  1 14:46:54 2017 (+0200)
 %%           By: Ola Leifler
 %%     Update #: 1493
-%% URL: 
-%% Keywords: 
-%% Compatibility: 
-%% 
+%% URL:
+%% Keywords:
+%% Compatibility:
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
-%%% Commentary: 
-%% 
+%%
+%%% Commentary:
+%%
 %% Read the README instead...
-%% 
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
+%%
 %%% Change log:
-%% 
-%% 
+%%
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
+%%
 %% This program is free software; you can redistribute it and/or
 %% modify it under the terms of the GNU General Public License as
 %% published by the Free Software Foundation; either version 3, or
 %% (at your option) any later version.
-%% 
+%%
 %% This program is distributed in the hope that it will be useful,
 %% but WITHOUT ANY WARRANTY; without even the implied warranty of
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 %% General Public License for more details.
-%% 
+%%
 %% You should have received a copy of the GNU General Public License
 %% along with this program; see the file COPYING.  If not, write to
 %% the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 %% Floor, Boston, MA 02110-1301, USA.
 
-%% 
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
+%%
 %%% Code:
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{liuthesis} [2017/04/20 Thesis class for LiU]
@@ -245,7 +245,7 @@
   \PassOptionsToClass{oneside}{memoir}
 }
 
-% % % Add the necessary biblatex options to the class options 
+% % % Add the necessary biblatex options to the class options
 
 % \DeclareOptionX{biblatexoptions}{%
 %  \gdef\@biblatexoptions{#1}
@@ -256,7 +256,7 @@
 % \PassOptionsToClass{#1}{memoir}
 % }
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}} 
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 
 \ExecuteOptions{english,phd,lith,a4paper}
 
@@ -331,7 +331,7 @@
 
 \ifhu
 % \ifphd
-\issn{0345-0082}  
+\issn{0345-0082}
 % \fi
 % \iflic
 % \typeout{Please define the ISSN by issuing a \textbackslash issn command}
@@ -373,27 +373,27 @@
 \RequirePackage{calc}
 \RequirePackage{ragged2e}
 
-\newlength{\marginboxlength} 
-\setlength{\marginboxlength}{\paperwidth} 
+\newlength{\marginboxlength}
+\setlength{\marginboxlength}{\paperwidth}
 \addtolength{\marginboxlength}{-\textwidth}
 \addtolength{\marginboxlength}{-\spinemargin}
 \addtolength{\marginboxlength}{-2mm}
 
-\definecolor{nicered}{rgb}{.647,.129,.149} 
-\newsavebox{\feline@article} 
+\definecolor{nicered}{rgb}{.647,.129,.149}
+\newsavebox{\feline@article}
 \newcommand\feline@article@marker[1][4cm]{%
-  \sbox\feline@article{% 
+  \sbox\feline@article{%
     \resizebox{!}{#1}{\fboxsep=1pt%
       \colorbox{nicered}{\color{white}\bfseries\thearticle\phantom{.}}%
     }}%
-  \rotatebox{90}{% 
+  \rotatebox{90}{%
     \resizebox{%
-      \heightof{\usebox{\feline@article}}+\depthof{\usebox{\feline@article}}}% 
+      \heightof{\usebox{\feline@article}}+\depthof{\usebox{\feline@article}}}%
     {!}{{\scshape \MakeUppercase Paper}}}\quad%
   \raisebox{\depthof{\usebox{\feline@article}}}{\usebox{\feline@article}}%
-} 
+}
 \newcommand\feline@chm[1][4cm]{%
-  \sbox\feline@article{\feline@article@marker[#1]}% 
+  \sbox\feline@article{\feline@article@marker[#1]}%
   \makebox[0pt][l]{% aka \rlap
     \makebox[\spinemargin][r]{
       \usebox\feline@article
@@ -429,21 +429,21 @@
 \newenvironment{papers}{
   \makeevenhead{ruled}{\papermark}{}{}
   \renewcommand*{\thechapter}{\thearticle}
-  \newlength{\numberheight} 
+  \newlength{\numberheight}
  \makechapterstyle{paperstyle}{%
-    \setlength{\afterchapskip}{40pt} 
-    \setlength{\numberheight}{10mm} 
-  \renewcommand*{\chapterheadstart}{\vspace*{40pt}} 
-    \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt} 
-    \renewcommand*{\chapnamefont}{\normalfont\LARGE\flushright} 
-    \renewcommand*{\chapnumfont}{\normalfont\HUGE} 
-    \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\flushright} 
+    \setlength{\afterchapskip}{40pt}
+    \setlength{\numberheight}{10mm}
+  \renewcommand*{\chapterheadstart}{\vspace*{40pt}}
+    \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
+    \renewcommand*{\chapnamefont}{\normalfont\LARGE\flushright}
+    \renewcommand*{\chapnumfont}{\normalfont\HUGE}
+    \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\flushright}
     \renewcommand*{\printchaptername}{%
-    } 
-    \renewcommand*{\chapternamenum}{} 
-    
+    }
+    \renewcommand*{\chapternamenum}{}
+
     \renewcommand*{\printchapternum}{%
-    }% 
+    }%
     \makeoddfoot{plain}{}{}{\thepage}}
     \renewcommand{\@chapapp}{\papermark}
     \chapterstyle{paperstyle}
@@ -471,7 +471,7 @@
 \DeclareGraphicsExtensions{.pdf,.jpg,.png}
 \fi
 
-\graphicspath{{figures/}}
+\graphicspath{{figures/}{charts/}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -555,9 +555,9 @@
     \begin{flushleft}
       Keywords: \@keywords\\[3mm]
       \@supportedby\mbox{}\\[3mm]
-      URL:    \texttt{http://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-\@divanumber/}\\[3mm] 
+      URL:    \texttt{http://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-\@divanumber/}\\[3mm]
     \end{flushleft}
-    
+
   }
 
 
@@ -596,7 +596,7 @@
     at the Faculty of Arts and Sciences to be publicly defended on
      \@presentationdateenglish{} at \@presentationtime{} in room
     \@presentationroom, building \@presentationbuilding, campus
-    \@presentationcampus{} by \@author} 
+    \@presentationcampus{} by \@author}
     \\[2\baselineskip]
     {\bfseries Abstract}\\
     \@abstract
@@ -692,10 +692,10 @@
   {\center
     {\footnotesize\centerline\@publicationseries{}%\\
       \ifphd
-      Dissertations, 
+      Dissertations,
       \else
       Licentiate Thesis
-      \fi No.  \@thesisnumber}\\[25mm] 
+      \fi No.  \@thesisnumber}\\[25mm]
      {\LARGE\bfseries\gettitle}\\[20mm]
      {\Large\bfseries\@author}\\
      \vfill
@@ -740,7 +740,7 @@
   \setlength{\parindent}{0mm}
     \setlength\parskip{8pt}\centerline{POPULÄRVETENSKAPLIG SAMMANFATTNING}
     \vspace{3mm}
-    \footnotesize{\@sammanfattning}    
+    \footnotesize{\@sammanfattning}
   \ifxetex
     \end{swedish}
   \else
@@ -757,7 +757,7 @@
   { \setlength{\parindent}{0mm}
     \setlength\parskip{8pt}\centerline{ABSTRACT}
     \vspace{3mm}
-    \footnotesize{\@abstract}    
+    \footnotesize{\@abstract}
   }
 }
 
@@ -867,29 +867,29 @@ document integrity, please refer to its www home page:
 % Page size and layout
 %
 %%%%%%%%%%%%%%%%%
-\clubpenalty=10000 
-\widowpenalty=10000 
-\raggedbottom 
+\clubpenalty=10000
+\widowpenalty=10000
+\raggedbottom
 \midsloppy
 
-\newlength{\mylen}	% a length 
+\newlength{\mylen}	% a length
 \newcommand{\alphabet}{abcdefghijklmnopqrstuvwxyzåäö} % the lowercase
-                                % alphabet 
-\begingroup	
-% keep font change local 
+                                % alphabet
+\begingroup
+% keep font change local
 % font specification e.g.,
-% \Large\sffamily 
-\settowidth{\mylen}{\alphabet} 
+% \Large\sffamily
+\settowidth{\mylen}{\alphabet}
 % The length of this alphabet is
-% \the\mylen. 
-\typeout{The length of the alphabet is \the\mylen}	
-% put in log file 
+% \the\mylen.
+\typeout{The length of the alphabet is \the\mylen}
+% put in log file
 % end the grouping
 \endgroup
 
 % Tryckmaterialets storlek
 \setstocksize{297mm}{210mm}
-% 
+%
 \ifstudent
 \settrimmedsize{290mm}{205mm}{*}
 \settypeblocksize{*}{34pc}{1.618} % golden ratio
@@ -926,7 +926,7 @@ document integrity, please refer to its www home page:
 
 
 % Variables and page layout
-\linespread{1.05} 
+\linespread{1.05}
 
 \typeout{******** LiU thesis layout ********}
 \typeoutlayout
@@ -936,7 +936,7 @@ document integrity, please refer to its www home page:
 %% Load user settings from the file settings.tex
 
 \AtBeginDocument{%
-  \resetlayout  
+  \resetlayout
   \checkandfixthelayout
   \pagestyle{empty}
   \ifexhibitpage
@@ -982,8 +982,8 @@ document integrity, please refer to its www home page:
   {\addcontentsline{toc}{chapter}{Acknowledgments}}
   \clearpage
   {\pagestyle{plain}\tableofcontents\relax\clearpage}
-  \iftotalfigures {\pagestyle{plain}\listoffigures\relax\clearpage}\fi 
-  \iftotaltables {\pagestyle{plain}\listoftables\relax\clearpage}\fi 
+  \iftotalfigures {\pagestyle{plain}\listoffigures\relax\clearpage}\fi
+  \iftotaltables {\pagestyle{plain}\listoftables\relax\clearpage}\fi
   \ifprinterfriendly
     \cleartooddpage
   \else
